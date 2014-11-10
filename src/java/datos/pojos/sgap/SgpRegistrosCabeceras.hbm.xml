@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpRegistrosCabeceras" table="SGP_REGISTROS_CABECERAS" schema="POSTGRADO">
+        <comment>Registra la forma en la que se va a registrar las calificaicones</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpRegistrosCabecerasId">
+            <key-property name="id" type="int">
+                <column name="ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="forevaId" type="int">
+                <column name="FOREVA_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpFormasEvaluacion" class="datos.pojos.sgap.SgpFormasEvaluacion" update="false" insert="false" fetch="select">
+            <column name="FOREVA_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la forma de evaluaci&#195;&#179;n a la que hacemos referencia</comment>
+            </column>
+        </many-to-one>
+        <property name="nroRegistroDefinitivo" type="byte">
+            <column name="NRO_REGISTRO_DEFINITIVO" precision="2" scale="0" not-null="true">
+                <comment>El n&#195;&#186;mero de asentamiento.</comment>
+            </column>
+        </property>
+        <property name="nombreCabecera" type="string">
+            <column name="NOMBRE_CABECERA" length="50" not-null="true" />
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="ayuda" type="string">
+            <column name="AYUDA" length="1000" />
+        </property>
+        <set name="sgpRegistrosAporteses" inverse="true">
+            <key>
+                <column name="REGCAB_ID" precision="5" scale="0" not-null="true">
+                    <comment>N&#195;&#186;mero de Asentamiento</comment>
+                </column>
+                <column name="FOREVA_ID" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpRegistrosAportes" />
+        </set>
+    </class>
+</hibernate-mapping>

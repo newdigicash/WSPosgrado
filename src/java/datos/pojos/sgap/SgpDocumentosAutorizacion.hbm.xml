@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpDocumentosAutorizacion" table="SGP_DOCUMENTOS_AUTORIZACION" schema="POSTGRADO">
+        <comment>Tabla que guarda los documentos de autorizaci&#195;&#179;n</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />            
+        </id>
+		<many-to-one name="sgpTiposProcesos" class="datos.pojos.sgap.SgpTiposProcesos" fetch="select">
+            <column name="TIPPRO_ID" precision="3" scale="0" not-null="true">
+                <comment>Tipo de proceso por ejemplo: Convalidaci&#243;n, recuperaci&#243;n, etc, proveniente de la tabla sgp_tipos_procesos</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpMatriculasAsignaturas" class="datos.pojos.sgap.SgpMatriculasAsignaturas" update="false" insert="false" fetch="select">
+            <column name="MATASIG_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la tabla matr&#195;&#173;culas asignaturas</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado</comment>
+            </column>
+            <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Edici&#195;&#179;n del curso de postgrado</comment>
+            </column>
+            <column name="PERSONA_ID" length="15" not-null="true">
+                <comment>Persona a la que se le aplica el docuemtno de autorizaci&#195;&#179;n</comment>
+            </column>
+            <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo de la asignatura que se le aplica el documento de autorizaci&#195;&#179;n</comment>
+            </column>
+        </many-to-one>		
+		<property name="numeroDocumento" type="string">
+            <column name="NUMERO_DOCUMENTO" length="20" not-null="true">
+                <comment>N&#195;&#186;mero de cocumento</comment>
+            </column>
+        </property>               
+        <property name="autorizado" type="string">
+            <column name="AUTORIZADO" length="150" not-null="true">
+                <comment>Descripci&#195;&#179;n de la unidad o persona que autoriza el proceso</comment>
+            </column>
+        </property>
+        <property name="fechaAutorizacion" type="date">
+            <column name="FECHA_AUTORIZACION" length="7" not-null="true">
+                <comment>Fecha de la autorizaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="observacion" type="string">
+            <column name="OBSERVACION" length="300">
+                <comment>Observaci&#195;&#179;n adicional al documento</comment>
+            </column>
+        </property>
+        <property name="referencia" type="string">
+            <column name="REFERENCIA" length="600" not-null="true">
+                <comment>Referencia generada por el sistema sobre los cambios que se hicieron en la tabla de matriculas asignaturas</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

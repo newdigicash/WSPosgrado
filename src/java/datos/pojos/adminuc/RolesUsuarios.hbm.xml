@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/12/2011 05:07:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.RolesUsuarios" table="ROLES__USUARIOS" schema="ADMINUC">
+        <comment>Roles de Usuarios</comment>
+        <composite-id name="id" class="datos.pojos.adminuc.RolesUsuariosId">
+            <key-property name="usuariPersonid" type="string">
+                <column name="USUARI_PERSONID" length="15" />
+            </key-property>
+            <key-property name="rolId" type="integer">
+                <column name="ROL_ID" precision="5" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="usuarios" class="datos.pojos.adminuc.Usuarios" update="false" insert="false" fetch="select">
+            <column name="USUARI_PERSONID" length="15" not-null="true">
+                <comment>ID de Usuario</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="roles" class="datos.pojos.adminuc.Roles" update="false" insert="false" fetch="select">
+            <column name="ROL_ID" length="3" not-null="true">
+                <comment>ID de Rol</comment>
+            </column>
+        </many-to-one>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Est&#195;&#161; activo</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creacion del registro</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Usuario de actualizacion de registro</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizacion de registro</comment>
+            </column>
+        </property>
+        <set name="accesoses" inverse="true">
+            <key>
+                <column name="USUARI_PERSONID" length="15" not-null="true" />
+                <column name="ROL_ID" length="3" not-null="true" />
+            </key>
+            <one-to-many class="datos.pojos.adminuc.Accesos" />
+        </set>
+    </class>
+</hibernate-mapping>

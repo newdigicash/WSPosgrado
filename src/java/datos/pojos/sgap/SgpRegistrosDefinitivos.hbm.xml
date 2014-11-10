@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-mar-2014 16:04:08 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpRegistrosDefinitivos" table="SGP_REGISTROS_DEFINITIVOS" schema="POSTGRADO">
+        <comment>Tabla que guarda los aportes que ya est&#225;n registrados definitivamente.</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpRegistrosDefinitivosId">
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="edicionId" type="int">
+                <column name="EDICION_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="asignaturaId" type="int">
+                <column name="ASIGNATURA_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="grupoId" type="int">
+                <column name="GRUPO_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="posColumnaNota" type="int">
+                <column name="POS_COLUMNA_NOTA" precision="2" scale="0" />
+            </key-property>
+        </composite-id>
+        <property name="registroDefinitivo" type="char">
+            <column name="REGISTRO_DEFINITIVO" length="1" not-null="true">
+                <comment>S: Registrada definitivamente y de ahi no se podr&#225;n hacer cambios al aporte. N: Permite cambios en las notas</comment>
+            </column>
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="FECHA_REGISTRO" length="7">
+                <comment>Fecha en la que se registr&#243; definitivamente el aporte.</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Campo de eliminaci&#243;n l&#243;gica a nivel de tupla.</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>Campo de auditor&#237;a que indica que usuario creo la tupla.</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>Campo de auditor&#237;a que indica la fecha de creaci&#243;n de la tupla.</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Campo de auditor&#237;a que indica que usuario actualiz&#243; la tupla.</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Campo de auditor&#237;a que indica la fecha que se actualiz&#243; la &#250;ltima vez de la tupla.</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

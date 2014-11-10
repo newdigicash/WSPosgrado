@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpMallas" table="SGP_MALLAS" schema="POSTGRADO">
+        <comment>Guarda la malla de los cursos de postgrado</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpMallasId">
+            <key-property name="id" type="int">
+                <column name="ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="placurId" type="int">
+                <column name="PLACUR_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpFormasEvaluacion" class="datos.pojos.sgap.SgpFormasEvaluacion" fetch="select">
+            <column name="FOREVA_ID" precision="5" scale="0" not-null="true">
+                <comment>Forma de evaluaci&#195;&#179;n que predomina en la malla</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpPlanesCurso" class="datos.pojos.sgap.SgpPlanesCurso" update="false" insert="false" fetch="select">
+            <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo del plan al que pertenece la malla</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado al que pertenece la malla</comment>
+            </column>
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" not-null="true">
+                <comment>Nombre de la malla</comment>
+            </column>
+        </property>
+        <property name="envigencia" type="char">
+            <column name="ENVIGENCIA" length="1" not-null="true">
+                <comment>Vigencia del plan S: Vigente; N: No vigente</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechacreacion" type="date">
+            <column name="FECHACREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpMencioneses" inverse="true">
+            <key>
+                <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la malla donde se va a crear la menci&#195;&#179;n</comment>
+                </column>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del plan de carrera al que pertenece la malla</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado que se va a ofertar menciones</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpMenciones" />
+        </set>
+        <set name="sgpAsignaturasMallases" inverse="true">
+            <key>
+                <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la malla donde se encuentra la asignautra</comment>
+                </column>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>Plan de carrera al que pertenece la asignatura</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del curso de postgrado donde se encuentra la asignatura</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpAsignaturasMallas" />
+        </set>
+        <set name="sgpEdicioneses" inverse="true">
+            <key>
+                <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Malla con la que se se cre&#195;&#179; una nueva edici&#195;&#179;n para el curso de postgrado</comment>
+                </column>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>Plan con la que se se cre&#195;&#179; una nueva edici&#195;&#179;n para el curso de postgrado</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que se le va a ofertar una edici&#195;&#179;n</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpEdiciones" />
+        </set>
+        
+         <set name="sgpUnidadesMallas" inverse="true">
+            <key>
+                <column name="UNM_MALLA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Malla a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n).</comment>
+                </column>
+                <column name="UNM_PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>Plan al que pertenece la malla, a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n).</comment>
+                </column>
+                <column name="UNM_CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que pertenece la malla, a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n).</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpUnidadesMalla" />
+        </set>
+    </class>
+</hibernate-mapping>

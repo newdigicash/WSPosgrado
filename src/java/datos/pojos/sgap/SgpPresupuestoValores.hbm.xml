@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpPresupuestoValores" table="SGP_PRESUPUESTO_VALORES" schema="POSTGRADO">
+        <comment>Tabla que guarda los valores de los presuepuestos de un plan de carrera</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpPresupuestoValoresId">
+            <key-property name="prerubId" type="int">
+                <column name="PRERUB_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="precabId" type="int">
+                <column name="PRECAB_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="edicionId" type="int">
+                <column name="EDICION_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpPresupuestoUnidades" class="datos.pojos.sgap.SgpPresupuestoUnidades" fetch="select">
+            <column name="UNIDAD_ID" precision="5" scale="0">
+                <comment>Unidad de medida de los rubros</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpPresupuestoRubros" class="datos.pojos.sgap.SgpPresupuestoRubros" update="false" insert="false" fetch="select">
+            <column name="PRERUB_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo de los rubros del presupuesto</comment>
+            </column>
+            <column name="PRECAB_ID" precision="5" scale="0" not-null="true">
+                <comment>c&#195;&#147;DIGO DE LA CABECERA DE LOS RUBROS</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpEdiciones" class="datos.pojos.sgap.SgpEdiciones" update="false" insert="false" fetch="select">
+            <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Edici&#195;&#179;n del curso de postgrado al que se le va a asignar el presupuesto</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado al que se le va a asignar el presupuesto</comment>
+            </column>
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="CANTIDAD" precision="5" scale="0" not-null="true">
+                <comment>Cantidad asignada al rubro</comment>
+            </column>
+        </property>
+        <property name="costoUnitario" type="double">
+            <column name="COSTO_UNITARIO" precision="8" not-null="true">
+                <comment>Precio unitario del rubro</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

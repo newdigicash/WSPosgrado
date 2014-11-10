@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/12/2011 05:07:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.Dependencias" table="DEPENDENCIAS" schema="ADMINUC">
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="codigoDependencia" type="string">
+            <column name="CODIGO_DEPENDENCIA" length="20" not-null="true" />
+        </property>
+        <property name="tipdepId" type="short">
+            <column name="TIPDEP_ID" precision="3" scale="0" not-null="true" />
+        </property>
+        <property name="dependIdPadre" type="int">
+            <column name="DEPEND_ID_PADRE" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="100" not-null="true" />
+        </property>
+        <property name="abreviatura" type="string">
+            <column name="ABREVIATURA" length="15" not-null="true" />
+        </property>
+        <property name="ubicacId" type="java.lang.Integer">
+            <column name="UBICAC_ID" precision="5" scale="0" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" length="100" />
+        </property>
+        <property name="numeroDireccion" type="string">
+            <column name="NUMERO_DIRECCION" length="10" />
+        </property>
+        <property name="casillaPostal" type="string">
+            <column name="CASILLA_POSTAL" length="15" />
+        </property>
+        <property name="url" type="string">
+            <column name="URL" length="50" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="50" />
+        </property>
+        <property name="actaCreacion" type="string">
+            <column name="ACTA_CREACION" length="50" />
+        </property>
+        <property name="fechaCreacionDependencia" type="date">
+            <column name="FECHA_CREACION_DEPENDENCIA" length="7" />
+        </property>
+        <property name="actaDisolucion" type="string">
+            <column name="ACTA_DISOLUCION" length="50" />
+        </property>
+        <property name="fechaDisolucion" type="date">
+            <column name="FECHA_DISOLUCION" length="7" />
+        </property>
+        <property name="partidaPresupuestaria" type="string">
+            <column name="PARTIDA_PRESUPUESTARIA" length="20" />
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="jefePersonaId" type="string">
+            <column name="JEFE_PERSONA_ID" length="15" />
+        </property>
+        
+        <set name="listaEntidadeses" inverse="true">
+            <key>
+                <column name="DEPENDENCIA_ID" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="datos.pojos.adminuc.ListaEntidades" />
+        </set>
+        
+        <set name="espaciosFisicoses" inverse="true">
+            <key>
+                <column name="DEPENDENCIA_ID" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="datos.pojos.adminuc.EspaciosFisicos" />
+        </set>
+        
+    </class>
+</hibernate-mapping>

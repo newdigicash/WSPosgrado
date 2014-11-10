@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/08/2011 09:18:13 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.ListasDistribucion" table="LISTAS_DISTRIBUCION" schema="ADMINUC">
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" not-null="true" unique="true">
+                <comment>Nombre de la lista de distribuci&#243;n</comment>
+            </column>
+        </property>
+        <property name="personId" type="string">
+            <column name="PERSON_ID" length="15">
+                <comment>Id de la persona responsable</comment>
+            </column>
+        </property>
+        <property name="emailPersonId" type="string">
+            <column name="EMAIL_PERSON_ID" length="100">
+                <comment>email de la persona responsable</comment>
+            </column>
+        </property>
+        <property name="tipo" type="string">
+            <column name="TIPO" length="20" not-null="true">
+                <comment>Para clasificar la lista de distribucion como DC: Docentes; ST: Estudiantes; MP: Empleados; TD: Todos</comment>
+            </column>
+        </property>
+        <property name="ambito" type="string">
+            <column name="AMBITO" length="400" />
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="listaEntidadeses" inverse="true">
+            <key>
+                <column name="LISDIS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la lista de distribuci&#243;n que es foreing de la tabla listas de distribuci&#243;n.</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.adminuc.ListaEntidades" />
+        </set>
+    </class>
+</hibernate-mapping>

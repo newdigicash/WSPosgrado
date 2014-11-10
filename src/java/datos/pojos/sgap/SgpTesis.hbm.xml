@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/04/2014 10:30:06 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpTesis" table="SGP_TESIS" schema="POSTGRADO">
+        <id name="tesId" type="int">
+            <column name="TES_ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sgpEdiciones" class="datos.pojos.sgap.SgpEdiciones" fetch="select">
+            <column name="TES_EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la edici&#243;n</comment>
+            </column>
+            <column name="TES_CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del posgrado</comment>
+            </column>
+        </many-to-one>
+        <property name="tesTitulo" type="string">
+            <column name="TES_TITULO" length="400" not-null="true">
+                <comment>Titulo/tema de tesis</comment>
+            </column>
+        </property>
+        <property name="tesDescripcion" type="string">
+            <column name="TES_DESCRIPCION" length="400">
+                <comment>Descripci&#243;n de la tesis</comment>
+            </column>
+        </property>
+        <property name="tesEstado" type="string">
+            <column name="TES_ESTADO" length="3" not-null="true">
+                <comment>Los estados de una tesis pueden ser. En curso (EC), Finalizada (FI), Anulado(AN)</comment>
+            </column>
+        </property>
+        <property name="tesPalabrasClave" type="string">
+            <column name="TES_PALABRAS_CLAVE" length="100">
+                <comment>Palabras clave para b&#250;squedas</comment>
+            </column>
+        </property>
+        <property name="tesFechaInicio" type="date">
+            <column name="TES_FECHA_INICIO" length="7" not-null="true">
+                <comment>Fecha de inicio de tesis</comment>
+            </column>
+        </property>
+        <property name="tesFechaFin" type="date">
+            <column name="TES_FECHA_FIN" length="7">
+                <comment>Fecha de finalizaci&#243;n de la tesis</comment>
+            </column>
+        </property>
+        <property name="tesDirectorId" type="string">
+            <column name="TES_DIRECTOR_ID" length="15" not-null="true">
+                <comment>Id del director de tesis</comment>
+            </column>
+        </property>
+        <property name="tesLugar" type="string">
+            <column name="TES_LUGAR" length="20">
+                <comment>Lugar donde se realiza la tesis</comment>
+            </column>
+        </property>
+        <property name="tesDepartamento" type="string">
+            <column name="TES_DEPARTAMENTO" length="100">
+                <comment>Departamento de la tesis</comment>
+            </column>
+        </property>
+        <property name="tesResponsable" type="string">
+            <column name="TES_RESPONSABLE" length="100">
+                <comment>Responsable de la tesis</comment>
+            </column>
+        </property>
+        <property name="tesCargo" type="string">
+            <column name="TES_CARGO" length="100">
+                <comment>Cargo del responsable</comment>
+            </column>
+        </property>
+        <property name="tesCorreoElectronico" type="string">
+            <column name="TES_CORREO_ELECTRONICO" length="100">
+                <comment>Correo electr&#243;nico del responsable</comment>
+            </column>
+        </property>
+        <property name="tesTelefono" type="java.lang.Long">
+            <column name="TES_TELEFONO" precision="15" scale="0">
+                <comment>Telefono del responsable</comment>
+            </column>
+        </property>
+        <property name="tesEstaAnulada" type="char">
+            <column name="TES_ESTA_ANULADA" length="1" not-null="true">
+                <comment>Esta anulada la tesis?</comment>
+            </column>
+        </property>
+        <property name="tesEstaactivo" type="char">
+            <column name="TES_ESTAACTIVO" length="1" not-null="true">
+                <comment>Borrado l&#243;gico</comment>
+            </column>
+        </property>
+        <property name="tesCreado" type="string">
+            <column name="TES_CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="tesFechaCreacion" type="date">
+            <column name="TES_FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="tesActualizado" type="string">
+            <column name="TES_ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="tesFechaActualizacion" type="date">
+            <column name="TES_FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <set name="sgpTesisAnulacions" inverse="true">
+            <key>
+                <column name="TAN_TESIS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la tesis</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpTesisAnulacion" />
+        </set>
+        <set name="sgpTesisEstudiantes" inverse="true">
+            <key>
+                <column name="TEE_TESIS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del trabajo de tesis</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpTesisEstudiante" />
+        </set>
+        <set name="sgpTesisAvances" inverse="true">
+            <key>
+                <column name="TEA_TESIS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la tesis</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpTesisAvance" />
+        </set>
+        <set name="sgpTesisProrrogas" inverse="true">
+            <key>
+                <column name="TEP_TESIS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la tesis</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpTesisProrroga" />
+        </set>
+        <set name="sgpTesisTribunals" inverse="true">
+            <key>
+                <column name="TET_TESIS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del trabajo de tesis</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpTesisTribunal" />
+        </set>
+    </class>
+</hibernate-mapping>

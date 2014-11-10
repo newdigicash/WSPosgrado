@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpAsignaturasMallas" table="SGP_ASIGNATURAS_MALLAS" schema="POSTGRADO">
+        <comment>Tabla que guarda las asignaturas de la malla de un cruso de postgrado</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpAsignaturasMallasId">
+            <key-property name="mallaId" type="int">
+                <column name="MALLA_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="placurId" type="int">
+                <column name="PLACUR_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="asignaturaId" type="int">
+                <column name="ASIGNATURA_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpFormasEvaluacion" class="datos.pojos.sgap.SgpFormasEvaluacion" fetch="select">
+            <column name="FOREVA_ID" precision="5" scale="0" not-null="true">
+                <comment>La forma en el que se va a evaluar la asignatura</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpEjesFormacion" class="datos.pojos.sgap.SgpEjesFormacion" fetch="select">
+            <column name="EJEFOR_ID" precision="5" scale="0" not-null="true">
+                <comment>Eje de formaci&#195;&#179;n de la asignatura: Obligatorias, Optativas, etc</comment>
+            </column>
+        </many-to-one>
+        <!--many-to-one name="sgpEjesTematicos" class="datos.pojos.sgap.SgpEjesTematicos" update="false" insert="false" fetch="select">
+            <column name="EJETEM_ID" precision="5" scale="0">
+                <comment>Eje tem&#195;&#161;tico al que pertenece la asignautra</comment>
+            </column>
+            <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                <comment>Plan de carrera al que pertenece la asignatura</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del curso de postgrado donde se encuentra la asignatura</comment>
+            </column>
+        </many-to-one-->
+        
+        <many-to-one class="datos.pojos.sgap.SgpUnidadesOrganizacion" fetch="select" name="sgpUnidadesOrganizacion" lazy="false">
+            <column name="UNIORG_ID" not-null="true" precision="5" scale="0">
+                <comment>Unidad de organización curricular en la que está agrupada las asignatura.</comment>
+            </column>
+        </many-to-one>
+        
+        <property name="ejetemId" type="java.lang.Integer">
+            <column name="EJETEM_ID" precision="5" scale="0">
+                <comment>Eje tem&#225;tico al que pertenece la asignautra. Luego de la aprobaci&#243;n del nuevo reglamento de r&#233;gimen acad&#233;mico el 21 de noviembre de
+                    2013, se dej&#243; de utilizar esta fijura, para tomar ahora los campos de formaci&#243;n del curr&#237;culo.
+                </comment>
+            </column>
+        </property>
+        <many-to-one name="sgpAsignaturas" class="datos.pojos.sgap.SgpAsignaturas" update="false" insert="false" fetch="select">
+            <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                <comment>Asignatura que se encuentra en la malla</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpMallas" class="datos.pojos.sgap.SgpMallas" update="false" insert="false" fetch="select">
+            <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la malla donde se encuentra la asignautra</comment>
+            </column>
+            <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                <comment>Plan de carrera al que pertenece la asignatura</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del curso de postgrado donde se encuentra la asignatura</comment>
+            </column>
+        </many-to-one>
+        <property name="horasPresenciales" type="java.lang.Integer">
+            <column name="HORAS_PRESENCIALES" precision="5" scale="0">
+                <comment>Horas presenciales que se asignan a la asignatura</comment>
+            </column>
+        </property>
+        <property name="horasEstudiante" type="java.lang.Integer">
+            <column name="HORAS_ESTUDIANTE" precision="5" scale="0">
+                <comment>N&#195;&#186;mero de horas o trabajo del estudiante para la asignatura</comment>
+            </column>
+        </property>
+        <property name="totalHoras" type="java.lang.Integer">
+            <column name="TOTAL_HORAS" precision="5" scale="0">
+                <comment>Total de horas sumadas horas presenciales y horas del estudiante</comment>
+            </column>
+        </property>
+        <property name="creditos" type="big_decimal">
+            <column name="CREDITOS" precision="5" not-null="true">
+                <comment>N&#195;&#186;mero total de cr&#195;&#169;ditos de la asignatura</comment>
+            </column>
+        </property>
+        <property name="esremediable" type="char">
+            <column name="ESREMEDIABLE" length="1" not-null="true">
+                <comment>Determina el caso de que la asignatura es remediable 'S' o no 'N'</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        
+        <property name="esobligatoria" type="string">
+            <column name="ESOBLIGATORIA" length="1" >
+                <comment>Campo utilizado para indicar la obligatoriedad que tiene el estudiante en cursar la asignatura</comment>
+            </column>
+        </property>
+        <property name="eselectiva" type="string">
+            <column name="ESELECTIVA" length="1" >
+                <comment>Campo utilizado para indicar que la asignatura es electiva.</comment>
+            </column>
+        </property>
+        
+        <property name="horasColaborativo" type="java.lang.Integer">
+            <column name="HORAS_COLABORATIVO" precision="5" scale="0">
+                <comment>Actividades de aprendizaje colaborativo: partenece al componente de docencia y comprende el trabajo en grupo de estudiantes en iteracci&#243;n permanente
+                    con el docente, incluyendo las tutor&#237;as. Total de horas en minutos.
+                </comment>
+            </column>
+        </property>
+        <property name="horasAplicacionExperimenta" type="java.lang.Integer">
+            <column name="HORAS_APLICACION_EXPERIMENTA" precision="5" scale="0">
+                <comment>Componente de pr&#225;cticas de aplicaci&#243;n y experimentaci&#243;n de los aprendizajes: Est&#225; orientado al desarrollo de experiencias de
+                    aplicaci&#243;n de los aprendizajes. El total de horas en minutos
+                </comment>
+            </column>
+        </property>
+        <property name="nivel" type="java.lang.Integer">
+            <column name="NIVEL" precision="2" scale="0">
+                <comment>N&#250;mero del nivel al que pertence la asignatura, es utilizada para soportar la matr&#237;cula por a&#241;os. Ejemplo en Medicina Internta se permite
+                matr&#237;cula por a&#241;os y el nivel indica en que a&#241;o se dictar&#225; la asignatura.</comment>
+            </column>
+        </property>
+        <set name="sgpMencionesAsignaturases" inverse="true">
+            <key>
+                <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la malla</comment>
+                </column>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo del plan de curso</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado</comment>
+                </column>
+                <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo de l a asignatura</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpMencionesAsignaturas" />
+        </set>
+        <set name="sgpSilaboses" inverse="true">
+            <key>
+                <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Malla que contiene la asignatura que se va a definir el s&#195;&#173;labo</comment>
+                </column>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>Plan de curso al que pertenece la asignatura y al que se le definir&#195;&#161; un s&#195;&#173;labo</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que pertenece la asignatura que se le asigna el s&#195;&#173;albo</comment>
+                </column>
+                <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la asignatura que se va a guardar el s&#195;&#173;labo</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpSilabos" />
+        </set>
+        <set name="sgpDocentesAsignaturases" inverse="true">
+            <key>
+                <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo de la malla</comment>
+                </column>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>Plan del curso de postgrado</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo del curso de postgrado</comment>
+                </column>
+                <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo de la asignautra</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpDocentesAsignaturas" />
+        </set>
+    </class>
+</hibernate-mapping>

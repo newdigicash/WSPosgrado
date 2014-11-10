@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpParametrosCurso" table="SGP_PARAMETROS_CURSO" schema="POSTGRADO">
+        <comment>Tabla que guarda las configuraciones por curso de postgrado y periodo lectivo</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpParametrosCursoId">
+            <key-property name="id" type="int">
+                <column name="ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="edicionId" type="int">
+                <column name="EDICION_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="perlecId" type="int">
+                <column name="PERLEC_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="paramteroId" type="int">
+                <column name="PARAMTERO_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpParametros" class="datos.pojos.sgap.SgpParametros" update="false" insert="false" fetch="select">
+            <column name="PARAMTERO_ID" precision="5" scale="0" not-null="true">
+                <comment>Par&#195;&#161;metro a ser configurado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpEdiciones" class="datos.pojos.sgap.SgpEdiciones" update="false" insert="false" fetch="select">
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de Postgrado</comment>
+            </column>
+            <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Edicion</comment>
+            </column>
+        </many-to-one>
+        <property name="fecha1" type="date">
+            <column name="FECHA1" length="7">
+                <comment>Fecha inicio</comment>
+            </column>
+        </property>
+        <property name="fecha2" type="date">
+            <column name="FECHA2" length="7">
+                <comment>Fecha termina</comment>
+            </column>
+        </property>
+        <property name="numero1" type="java.lang.Integer">
+            <column name="NUMERO1" precision="8" scale="0">
+                <comment>Cualqueir n&#195;&#186;mero 1 a ser configurado</comment>
+            </column>
+        </property>
+        <property name="numero2" type="java.lang.Integer">
+            <column name="NUMERO2" precision="8" scale="0">
+                <comment>Cualqueir n&#195;&#186;mero 2 a ser configurado</comment>
+            </column>
+        </property>
+        <property name="cadena1" type="string">
+            <column name="CADENA1" length="50">
+                <comment>Cualqueir cadena 1 a ser configurado</comment>
+            </column>
+        </property>
+        <property name="cadena2" type="string">
+            <column name="CADENA2" length="50">
+                <comment>Cualqueir cadena 2 a ser configurado</comment>
+            </column>
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="500" not-null="true">
+                <comment>Ayuda descriptiva para saber que se configura en cada par&#195;&#161;metro</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

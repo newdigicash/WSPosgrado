@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpMenciones" table="SGP_MENCIONES" schema="POSTGRADO">
+        <comment>Tabla que guarda las menciones de un curso de postgrado</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpMencionesId">
+            <key-property name="id" type="int">
+                <column name="ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="mallaId" type="int">
+                <column name="MALLA_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="placurId" type="int">
+                <column name="PLACUR_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpMallas" class="datos.pojos.sgap.SgpMallas" update="false" insert="false" fetch="select">
+            <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la malla donde se va a crear la menci&#195;&#179;n</comment>
+            </column>
+            <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del plan de carrera al que pertenece la malla</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado que se va a ofertar menciones</comment>
+            </column>
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" not-null="true">
+                <comment>Descripci&#195;&#179;n de la menci&#195;&#179;n para la malla</comment>
+            </column>
+        </property>
+        <property name="minimoEstudiantes" type="short">
+            <column name="MINIMO_ESTUDIANTES" precision="3" scale="0" not-null="true">
+                <comment>N&#195;&#186;mero m&#195;&#173;nimo de estudiantes para la menci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="maxEstudiantes" type="short">
+            <column name="MAX_ESTUDIANTES" precision="3" scale="0" not-null="true">
+                <comment>M&#195;&#161;ximo n&#195;&#186;mero de setudiantes para la menci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpMencionesAsignaturases" inverse="true">
+            <key>
+                <column name="MENCION_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo de la menci&#195;&#179;n</comment>
+                </column>
+                <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la malla</comment>
+                </column>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo del plan de curso</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpMencionesAsignaturas" />
+        </set>
+        
+        <set name="sgpUnidadesMallas" inverse="true" >
+            <key>
+                <column name="UNM_MENCION_ID" precision="5" scale="0" not-null="false" >
+                    <comment>Menci&#243;n a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n). Si la menci&#243;n es nula, la configuraci&#243;n
+                        se aplica a nivel de malla caso contrario se aplica a la menci&#243;n.
+                    </comment>
+                </column>
+                <column name="UNM_MALLA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Malla a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n).</comment>
+                </column>
+                <column name="UNM_PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>Plan al que pertenece la malla, a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n).</comment>
+                </column>
+                <column name="UNM_CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que pertenece la malla, a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n).</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpUnidadesMalla" />
+        </set>
+    </class>
+</hibernate-mapping>

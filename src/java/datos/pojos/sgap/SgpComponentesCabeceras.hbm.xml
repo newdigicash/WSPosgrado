@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpComponentesCabeceras" table="SGP_COMPONENTES_CABECERAS" schema="POSTGRADO">
+        <comment>Tabla que guarda el maestro de las configuraciones de componentes planes</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nivforId" type="int">
+            <column name="NIVFOR_ID" precision="5" scale="0" not-null="true">
+                <comment>Nivel de formaci&#195;&#179;n al que pertenece la configuraci&#195;&#179;n para componentes</comment>
+            </column>
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="200" not-null="true">
+                <comment>Nombre de la cabecera para la configuraci&#195;&#179;n de componentes</comment>
+            </column>
+        </property>
+        <property name="envigencia" type="char">
+            <column name="ENVIGENCIA" length="1" not-null="true">
+                <comment>Campo que indica si la configuraci&#195;&#179;n de los componentes planes est&#195;&#161; en vigencia S: o no en vigencia 'N'</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="atualizado" type="string">
+            <column name="ATUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpComponentesDetalleses" inverse="true">
+            <key>
+                <column name="CABCOM_ID" precision="5" scale="0" not-null="true">
+                    <comment>Maestro de la configuraci&#195;&#179;n del componentes que viene de la tabla SGP_cabeceras_componentes</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpComponentesDetalles" />
+        </set>
+        <set name="sgpPlanesCursos" inverse="true">
+            <key>
+                <column name="CABCOM_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo de la cabecera para la configuraci&#195;&#179;n de componentes del plan</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpPlanesCurso" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpEquipoResponsable" table="SGP_EQUIPO_RESPONSABLE" schema="POSTGRADO">
+        <comment>Guarda la informaci&#195;&#179;n de equipos responsables de un plan de carrera</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpEquipoResponsableId">
+            <key-property name="edicionId" type="int">
+                <column name="EDICION_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="personaId" type="string">
+                <column name="PERSONA_ID" length="15" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpEdiciones" class="datos.pojos.sgap.SgpEdiciones" update="false" insert="false" fetch="select">
+            <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Plan de carrera al que se asigna el equipo responsable</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado para el plan que se asigana responsables</comment>
+            </column>
+        </many-to-one>
+        <property name="titulo" type="string">
+            <column name="TITULO" length="10">
+                <comment>T&#195;&#173;tulo que aparece al responsable</comment>
+            </column>
+        </property>
+        <property name="cargo" type="string">
+            <column name="CARGO" length="100" not-null="true">
+                <comment>Cargo del miembro del equipo</comment>
+            </column>
+        </property>
+        <property name="nroHorasSemanales" type="int">
+            <column name="NRO_HORAS_SEMANALES" precision="2" scale="0" not-null="true">
+                <comment>Dedicaci&#195;&#179;n semanal en horas de la persona responsable al curso de postgrado</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/01/2012 05:32:37 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.PrtPersonasDiscapacidades" table="PRT_PERSONAS_DISCAPACIDADES" schema="ADMINUC">
+        <comment>Tabla que guarda las personas que tienen discapacidades</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">ADMINUC.SEQ_PRT_PER_DISCAPACIDADES</param> 
+            </generator>
+        </id>
+        <many-to-one name="prtTiposDiscapacidad" class="datos.pojos.adminuc.PrtTiposDiscapacidad" fetch="select" lazy="false">
+            <column name="TIPDIS_ID" precision="5" scale="0" not-null="true">
+                <comment>Tipo de discapacidad que tiene la persona</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="prtDiscapacitados" class="datos.pojos.adminuc.PrtDiscapacitados" fetch="select" lazy="false">
+            <column name="PERSONA_ID" length="15" not-null="true">
+                <comment>Persona que tiene discapacidad</comment>
+            </column>
+        </many-to-one>
+        <property name="otraDiscapacidad" type="string">
+            <column name="OTRA_DISCAPACIDAD" length="100">
+                <comment>Especifique el otro tipo de discapacidad</comment>
+            </column>
+        </property>
+        <property name="porcentajeDiscapacidad" type="short">
+            <column name="`PORCENTAJE _DISCAPACIDAD`" precision="3" scale="0" not-null="true">
+                <comment>Porcentaje de discapacidad que tiene la persona</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpDirectoresCurso" table="SGP_DIRECTORES_CURSO" schema="POSTGRADO">
+        <comment>Tabla que guarda los directores de los cursos de postgrado</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sgpEdiciones" class="datos.pojos.sgap.SgpEdiciones" fetch="select">
+            <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>N&#195;&#186;jmero de edici&#195;&#179;n del curso de postgrado</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo del curso de postgrados</comment>
+            </column>
+        </many-to-one>
+        <property name="personaId" type="string">
+            <column name="PERSONA_ID" length="15" not-null="true">
+                <comment>Identificaci&#195;&#179;n del director del curso</comment>
+            </column>
+        </property>
+        <property name="titulo" type="string">
+            <column name="TITULO" length="10" not-null="true">
+                <comment>T&#195;&#173;tulo del director ejemplo: Dr, Mgs, Lcdo, etc.</comment>
+            </column>
+        </property>
+        <property name="encargado" type="char">
+            <column name="ENCARGADO" length="1" not-null="true">
+                <comment>Si es director encargado:</comment>
+            </column>
+        </property>
+        <property name="enFuncion" type="char">
+            <column name="EN_FUNCION" length="1" not-null="true">
+                <comment>Si la persona est&#195;&#161; en funci&#195;&#179;n del cargo</comment>
+            </column>
+        </property>
+        <property name="fechaFinaliza" type="date">
+            <column name="FECHA_FINALIZA" length="7">
+                <comment>Fecha en la que finaliza la funci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="fechaInicia" type="date">
+            <column name="FECHA_INICIA" length="7" not-null="true">
+                <comment>Fecha en la que finaliza la funci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

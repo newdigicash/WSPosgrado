@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpEdiciones" table="SGP_EDICIONES" schema="POSTGRADO">
+        <comment>Ediciones de los cursos de postgrado</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpEdicionesId">
+            <key-property name="id" type="int">
+                <column name="ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpDocumentosBinariosByProyectoPdf" class="datos.pojos.sgap.SgpDocumentosBinarios" fetch="select">
+            <column name="PROYECTO_PDF" precision="5" scale="0" not-null="true">
+                <comment>Identificaci&#195;&#179;n del documento binario para el plan del proyecto del curso.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpAutorizaciones" class="datos.pojos.sgap.SgpAutorizaciones" fetch="select">
+            <column name="AUTORIZACION_ID" precision="5" scale="0"/>
+        </many-to-one>
+        <many-to-one name="sgpDocumentosBinariosByVistoBuenoPdf" class="datos.pojos.sgap.SgpDocumentosBinarios" fetch="select">
+            <column name="VISTO_BUENO_PDF" precision="5" scale="0" not-null="true">
+                <comment>Visto bueno para la reedici&#195;&#179;n del curso de postgrado en formato PDF</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpMallas" class="datos.pojos.sgap.SgpMallas" update="false" insert="false" fetch="select">
+            <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                <comment>Malla con la que se se cre&#195;&#179; una nueva edici&#195;&#179;n para el curso de postgrado</comment>
+            </column>
+            <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                <comment>Plan con la que se se cre&#195;&#179; una nueva edici&#195;&#179;n para el curso de postgrado</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado al que se le va a ofertar una edici&#195;&#179;n</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpDocumentosBinariosByProyectoPublicoPdf" class="datos.pojos.sgap.SgpDocumentosBinarios" fetch="select">
+            <column name="PROYECTO_PUBLICO_PDF" precision="5" scale="0" not-null="true">
+                <comment>Identificaci&#195;&#179;n del documento binario para el documento p&#195;&#186;blico del proyecto del curso.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpSecciones" class="datos.pojos.sgap.SgpSecciones" fetch="select">
+            <column name="SECCION_ID" precision="5" scale="0" not-null="true">
+                <comment>Secci&#195;&#179;n de la edici&#195;&#179;n: Diurna, Vespertina, Nocturna, General</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="ambitosServicios" class="ec.edu.ucuenca.gestionse.accesoDatos.modelo.AmbitosServicios" fetch="select" lazy="false">
+        <!--many-to-one name="ambitosServicios" class="datos.pojos.sgse.AmbitosServicios" fetch="select"-->
+            <column name="AMBSER_ID" precision="5" scale="0" not-null="false">
+                
+            </column>
+            
+        </many-to-one>
+       
+        <property name="perlecId" type="int">
+            <column name="PERLEC_ID" precision="5" scale="0" not-null="true">
+                <comment>Periodo lectivo en donde e crea la edici&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="nombreEdicion" type="string">
+            <column name="NOMBRE_EDICION" length="60" not-null="true">
+                <comment>El nombre de la edici&#195;&#179;n por ejemplo: edici&#195;&#179;n 1, edici&#195;&#179;n2, etc</comment>
+            </column>
+        </property>
+        <property name="minimoEstudiantes" type="int">
+            <column name="MINIMO_ESTUDIANTES" precision="3" scale="0" not-null="true">
+                <comment>N&#195;&#186;mero de estudiantes m&#195;&#173;nimo para aperturar el curso de postgrado</comment>
+            </column>
+        </property>
+        <property name="nroParalelos" type="int">
+            <column name="NRO_PARALELOS" precision="3" scale="0" not-null="true">
+                <comment>N&#195;&#186;mero m&#195;&#161;ximo de paralelos que va a ofertar el curso de postgrados</comment>
+            </column>
+        </property>
+        <property name="maxEstudiantesParalelo" type="int">
+            <column name="MAX_ESTUDIANTES_PARALELO" precision="3" scale="0" not-null="true">
+                <comment>N&#195;&#186;mero de estudiantes m&#195;&#161;ximo por paralelo</comment>
+            </column>
+        </property>
+        <property name="duracion" type="int">
+            <column name="DURACION" precision="3" scale="0" not-null="true">
+                <comment>Duraci&#195;&#179;n del curso en meses</comment>
+            </column>
+        </property>
+        <property name="costo" type="double">
+            <column name="COSTO" precision="8" not-null="true">
+                <comment>Costo total del curso de postgrado para el estudiante</comment>
+            </column>
+        </property>
+        <property name="estado" type="string">
+            <column name="ESTADO" length="3" not-null="true">
+                <comment>Determina si la edici&#195;&#179;n est&#195;&#161; VIG: Vigente, CUR: En curso, FIN: Finalizado</comment>
+            </column>
+        </property>
+        
+        <property name="autorizado" type="char">
+            <column name="AUTORIZADO" length="1" not-null="true">
+                <comment>Si la edici&#195;&#179;n fue autorizada</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="fechaAprobacion" type="date">
+            <column name="FECHA_APROBACION" length="7" />
+        </property>
+        <property name="ambserId2" type="java.lang.Integer">
+            <column name="AMBSER_ID2" precision="5" scale="0">
+                <comment>Id del &#225;mbito servicio para el segundo a&#241;o de matr&#237;cula.</comment>
+            </column>
+        </property>
+        <property name="ambserId3" type="java.lang.Integer">
+            <column name="AMBSER_ID3" precision="5" scale="0">
+                <comment>Id del &#225;mbito servicio para el tercer a&#241;o de matr&#237;cula.</comment>
+            </column>
+        </property>
+        <property name="ambserId4" type="java.lang.Integer">
+            <column name="AMBSER_ID4" precision="5" scale="0">
+                <comment>Id del &#225;mbito servicio para el cuarto a&#241;o de matr&#237;cula.</comment>
+            </column>
+        </property>
+        <property name="ambserId5" type="java.lang.Integer">
+            <column name="AMBSER_ID5" precision="5" scale="0">
+                <comment>Id del &#225;mbito servicio para el quinto a&#241;o de matr&#237;cula.</comment>
+            </column>
+        </property>
+        <set name="sgpCursosEstudianteses" inverse="true">
+            <key>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true" />
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado que se le asigna al estudiante</comment>
+            </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpCursosEstudiantes" />
+        </set>
+        <set name="sgpPresupuestoValoreses" inverse="true">
+            <key>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>Edici&#195;&#179;n del curso de postgrado al que se le va a asignar el presupuesto</comment>
+            </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que se le va a asignar el presupuesto</comment>
+            </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpPresupuestoValores" />
+        </set>
+        <set name="sgpEquipoResponsables" inverse="true">
+            <key>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>Plan de carrera al que se asigna el equipo responsable</comment>
+            </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado para el plan que se asigana responsables</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpEquipoResponsable" />
+        </set>
+        <set name="sgpOfertaAsignaturas" inverse="true">
+            <key>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado en el que se oferta asiganturas</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Periodo lectivo de oferta asignaturas</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpOfertaAsignatura" />
+        </set>
+        <set name="sgpDirectoresCursos" inverse="true">
+            <key>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>N&#195;&#186;jmero de edici&#195;&#179;n del curso de postgrado</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo del curso de postgrados</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpDirectoresCurso" />
+        </set>
+        <set name="sgpSilaboses" inverse="true">
+            <key>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>N&#195;&#186;mero de edici&#195;&#179;n del postgrado donde se registra el s&#195;&#173;labo</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que pertenece la asignatura que se le asigna el s&#195;&#173;albo</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpSilabos" />
+        </set>
+        <set name="sgpParametrosCursos" inverse="true">
+            <key>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>N&#195;&#186;mero de edici&#195;&#179;n del postgrado donde se registra el s&#195;&#173;labo</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que pertenece la asignatura que se le asigna el s&#195;&#173;albo</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpParametrosCurso" />
+        </set>
+    </class>
+</hibernate-mapping>

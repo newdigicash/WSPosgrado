@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 05/01/2012 09:59:12 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.TiposDocumentosid" table="TIPOS_DOCUMENTOSID" schema="ADMINUC">
+        <comment>Tipos de documentos de identificaci&#195;&#179;n</comment>
+        <id name="id" type="string">
+            <column name="ID" length="3" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="20">
+                <comment>Descripci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1">
+                <comment>Est&#195;&#161; activo</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7">
+                <comment>Fecha de creacion del registro</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Usuario de actualizacion de registro</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizacion de registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

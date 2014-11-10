@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpHorariosDocentes" table="SGP_HORARIOS_DOCENTES" schema="POSTGRADO">
+        <comment>Si una asignatura tiene mas de un docente. En esta tabla se almacena los horarios para cada docente siempre que los horarios de los docentes sean
+        diferentes.</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpHorariosDocentesId">
+            <key-property name="id" type="int">
+                <column name="ID" precision="3" scale="0" />
+            </key-property>
+            <key-property name="horofeId" type="int">
+                <column name="HOROFE_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="edicionId" type="int">
+                <column name="EDICION_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="asignaturaId" type="int">
+                <column name="ASIGNATURA_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="grupo" type="int">
+                <column name="GRUPO" precision="2" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpHorariosOfertas" class="datos.pojos.sgap.SgpHorariosOfertas" update="false" insert="false" fetch="select">
+            <column name="HOROFE_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la oferta que hereda de la tabla horarios_ofertas</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>id de la carrera que hereda de la tabla horarios_ofertas</comment>
+            </column>
+            <column name="EDICION_ID" precision="5" scale="0" not-null="true" />
+            <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                <comment>id de la asignatura que hereda de la tabla horarios_ofertas</comment>
+            </column>
+            <column name="GRUPO" precision="2" scale="0" not-null="true">
+                <comment>grupo de la oferta que hereda de la tabla horarios_ofertas</comment>
+            </column>
+        </many-to-one>
+        <property name="personaId" type="string">
+            <column name="PERSONA_ID" length="15" not-null="true">
+                <comment>Id del docente que imparte una oferta de asignatura en un horario</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizado" type="date">
+            <column name="FECHA_ACTUALIZADO" length="7" />
+        </property>
+        <property name="marcaAsistencia" type="java.lang.Character">
+            <column name="MARCA_ASISTENCIA" length="1">
+                <comment>Si el docente se concidera control de asistencia</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/12/2011 05:07:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.PermisosMenus" table="PERMISOS_MENUS" schema="ADMINUC">
+        <composite-id name="id" class="datos.pojos.adminuc.PermisosMenusId">
+            <key-property name="usuariPersonid" type="string">
+                <column name="USUARI_PERSONID" length="15" />
+            </key-property>
+            <key-property name="rolId" type="string">
+                <column name="ROL_ID" length="3" />
+            </key-property>
+            <key-property name="menuId" type="int">
+                <column name="MENU_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="menus" class="datos.pojos.adminuc.Menus" update="false" insert="false" fetch="select">
+            <column name="MENU_ID" precision="5" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="fechaInicio" type="date">
+            <column name="FECHA_INICIO" length="7" />
+        </property>
+        <property name="fechaFinal" type="date">
+            <column name="FECHA_FINAL" length="7" />
+        </property>
+        <property name="fechaProrroga" type="date">
+            <column name="FECHA_PRORROGA" length="7" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="OBSERVACIONES" length="100" />
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

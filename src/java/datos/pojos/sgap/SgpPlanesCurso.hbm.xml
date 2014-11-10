@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpPlanesCurso" table="SGP_PLANES_CURSO" schema="POSTGRADO">
+        <comment>Planes curriculares de los cursos de postgrado</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpPlanesCursoId">
+            <key-property name="id" type="int">
+                <column name="ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpResolucionesSenescyt" class="datos.pojos.sgap.SgpResolucionesSenescyt" fetch="select" lazy="false">
+            <column name="RESSEN_ID" precision="5" scale="0" not-null="true">
+                <comment>Resoluci&#195;&#179;n del SENESCYT con la que se creo el plan del curso de postgrado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpComponentesCabeceras" class="datos.pojos.sgap.SgpComponentesCabeceras" fetch="select">
+            <column name="CABCOM_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo de la cabecera para la configuraci&#195;&#179;n de componentes del plan</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpCursosPostgrado" class="datos.pojos.sgap.SgpCursosPostgrado" lazy="false" update="false" insert="false" fetch="select">
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del curso de postgrado al que pertenece el plan curricular</comment>
+            </column>
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" not-null="true">
+                <comment>Nombre con el que se identifica al plan curricular</comment>
+            </column>
+        </property>
+        <property name="creditosGrado" type="big_decimal">
+            <column name="CREDITOS_GRADO" precision="5" not-null="true">
+                <comment>Total de cr&#195;&#169;ditos del curso de postgrado sin contar los cr&#195;&#169;ditos de la tesis</comment>
+            </column>
+        </property>
+        <property name="creditosTesis" type="big_decimal">
+            <column name="CREDITOS_TESIS" precision="5" not-null="true">
+                <comment>Valor en cr&#195;&#169;ditos de la tesis</comment>
+            </column>
+        </property>
+        <property name="inseduId" type="int">
+            <column name="INSEDU_ID" precision="5" scale="0" not-null="true">
+                <comment>Sede del curso de postgrado</comment>
+            </column>
+        </property>
+        <property name="ubicacionId" type="int">
+            <column name="UBICACION_ID" precision="5" scale="0" not-null="true">
+                <comment>Lugar de la sede a nivel de cant&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="tipoSede" type="string">
+            <column name="TIPO_SEDE" length="3" not-null="true">
+                <comment>La sede de estudios es MAT: Matriz o EXT: Extensi&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="envigencia" type="char">
+            <column name="ENVIGENCIA" length="1" not-null="true">
+                <comment>Si el plan est&#195;&#161; en vigencia 'S' en vigencia 'N' no vigencia</comment>
+            </column>
+        </property>
+        <property name="dependenciaId" type="int">
+            <column name="DEPENDENCIA_ID" precision="5" scale="0" not-null="true">
+                <comment>Unidad acad&#195;&#169;mica que ejecut&#195;&#179; el curso de postgrado</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="timestamp">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" length="150" />
+        </property>
+         <property name="numeroSemestres" type="int">
+            <column name="NUMERO_SEMESTRES" precision="2" scale="0">
+            </column>
+        </property>
+        <property name="nroInstanciasMatricula" type="int">
+            <column name="NRO_INSTANCIAS_MATRICULA" precision="2" scale="0">
+                <comment>En el caso que la matr&#237;cula sea COMPLETA, el n&#250;mero ser&#225; 1, pero si la matr&#237;cula es PARCIAL, es decir, la matr&#237;cula va a ser por
+                a&#241;os, el n&#250;mero va a ser el n&#250;mero de a&#241;os (instancias) que permite matr&#237;cula.</comment>
+            </column>
+        </property>
+        
+        <set name="sgpActividadesCronogramas" inverse="true">
+            <key>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo de la edici&#195;&#179;n de un curso de postgrado</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo del curso de postgrado</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpActividadesCronograma" />
+        </set>
+        <set name="sgpComponentesPlaneses" inverse="true">
+            <key>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del plan de carrera</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del curso de postgrado</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpComponentesPlanes" />
+        </set>
+        <set name="sgpMallases" inverse="true">
+            <key>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo del plan al que pertenece la malla</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que pertenece la malla</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpMallas" />
+        </set>
+        <set name="sgpPlanesModalidadeses" inverse="true">
+            <key>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>Plan de curso que se le va a asignar la modalidad</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que pertenece el plan que se le va a asignar la modalidad</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpPlanesModalidades" />
+        </set>
+        <set name="sgpInstitucionesCursos" inverse="true">
+            <key>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true" />
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado en el que se vincula las instituciones educativas que organiza</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpInstitucionesCurso" />
+        </set>
+        <set name="sgpLineasInvestigacions" inverse="true">
+            <key>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>Plan de carrera al que se le asigna las lineas de investigaci&#195;&#179;n</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que se le asigna las lineas de investigaci&#195;&#179;n</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpLineasInvestigacion" />
+        </set>
+        <set name="sgpEjesTematicoses" inverse="true">
+            <key>
+                <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo del plan de carrera al que pertenece el m&#195;&#179;dulo</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que pertenece el m&#195;&#179;dulo</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpEjesTematicos" />
+        </set>
+    </class>
+</hibernate-mapping>

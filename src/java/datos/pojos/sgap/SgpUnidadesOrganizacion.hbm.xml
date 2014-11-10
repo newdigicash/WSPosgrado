@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/12/2013 07:48:03 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpUnidadesOrganizacion" table="SGP_UNIDADES_ORGANIZACION" schema="POSTGRADO">
+        <comment>Unidades de organizaci&#243;n curricular: Las unidades de organizaci&#243;n curricular son formas de ordenamiento de las asignaturas, cursos o equivalentes, que
+            permiten integrar el aprendizaje. En los programas existen las siguiente: - Unidad B&#225;sica; - Unidad diciplinar, multi diciplinar y/o inter diciplinar avanzada; -
+            Unidad de titulaci&#243;n.
+        </comment>
+        <id name="unoId" type="int">
+            <column name="UNO_ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sgpUnidadesCabecera" class="datos.pojos.sgap.SgpUnidadesCabecera" fetch="select">
+            <column name="UNO_UNICAB_ID" precision="5" scale="0" not-null="true">
+                <comment>Grupo al que pertenece la unidade de organizaci&#243;n curricular</comment>
+            </column>
+        </many-to-one>
+        <property name="unoNombre" type="string">
+            <column name="UNO_NOMBRE" length="100" not-null="true" unique="true">
+                <comment>Nombre de la unidad de organizaci&#243;n curricular. art 29.</comment>
+            </column>
+        </property>
+        <property name="unoNombreCorto" type="string">
+            <column name="UNO_NOMBRE_CORTO" length="40" not-null="true">
+                <comment>Abreviatura de la unidad de organizaci&#243;n curricular.</comment>
+            </column>
+        </property>
+        <property name="unoColor" type="string">
+            <column name="UNO_COLOR" length="10" not-null="true">
+                <comment>Color que se requiera para presentar en reportes.</comment>
+            </column>
+        </property>
+        <property name="unoEstaactivo" type="char">
+            <column name="UNO_ESTAACTIVO" length="1" not-null="true">
+                <comment>Campor para indicar borrado l&#243;gico de la tupla.</comment>
+            </column>
+        </property>
+        <property name="unoCreado" type="string">
+            <column name="UNO_CREADO" length="20" not-null="true">
+                <comment>Campo de auditor&#237;a a nivel de tupla, que indica la persona que creo el registro.</comment>
+            </column>
+        </property>
+        <property name="unoFechaCreacion" type="timestamp">
+            <column name="UNO_FECHA_CREACION" not-null="true">
+                <comment>Campo de auditor&#237;a a nivel de tupla, que indica la fecha en la que se creo el registro.</comment>
+            </column>
+        </property>
+        <property name="unoActualizado" type="string">
+            <column name="UNO_ACTUALIZADO" length="20">
+                <comment>Campo de auditor&#237;a a nivel de tupla, que indica la persona que actualiz&#243; la &#250;ltima vez el registro.</comment>
+            </column>
+        </property>
+        <property name="unoFechaActualizacion" type="timestamp">
+            <column name="UNO_FECHA_ACTUALIZACION" >
+                <comment>Campo de auditor&#237;a a nivel de tupla, que indica la fecha en la que se actualiz&#243; la &#250;ltima vez el registro.</comment>
+            </column>
+        </property>
+        <set name="sgpAsignaturasMallases" inverse="true">
+            <key>
+                <column name="UNIORG_ID" precision="5" scale="0" not-null="true">
+                    <comment>Unidad de organizaci&#243;n curricular en la que est&#225; agrupada las asignatura.</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpAsignaturasMallas" />
+        </set>
+        
+        <set name="sgpUnidadesMallas" inverse="true">
+            <key>
+                <column name="UNM_UNIORG_ID" precision="5" scale="0" not-null="true">
+                    <comment>Unidad de organizaci&#243;n curricular, sobre el cual se va a empaquetar las asignaturas.</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpUnidadesMalla" />
+        </set> 
+    </class>
+</hibernate-mapping>

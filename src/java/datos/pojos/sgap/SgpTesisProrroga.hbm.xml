@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/04/2014 10:30:06 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpTesisProrroga" table="SGP_TESIS_PRORROGA" schema="POSTGRADO">
+        <id name="tepId" type="int">
+            <column name="TEP_ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sgpTesis" class="datos.pojos.sgap.SgpTesis" fetch="select" lazy="false">
+            <column name="TEP_TESIS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la tesis</comment>
+            </column>
+        </many-to-one>
+        <property name="tepNumProrroga" type="short">
+            <column name="TEP_NUM_PRORROGA" precision="3" scale="0" not-null="true" unique="true">
+                <comment>N&#250;mero de pr&#243;rroga de tesis</comment>
+            </column>
+        </property>
+        <property name="tepFechaAprobacion" type="date">
+            <column name="TEP_FECHA_APROBACION" length="7" not-null="true">
+                <comment>Fecha de aprobaci&#243;n de pr&#243;rroga</comment>
+            </column>
+        </property>
+        <property name="tepNumDocumento" type="string">
+            <column name="TEP_NUM_DOCUMENTO" length="20" not-null="true" unique="true">
+                <comment>N&#250;mero de documento de autorizaci&#243;n de pr&#243;rroga</comment>
+            </column>
+        </property>
+        <property name="tepTiempo" type="java.lang.Short">
+            <column name="TEP_TIEMPO" precision="3" scale="0">
+                <comment>Cantidad de tiempo (n&#250;mero de prorroga)</comment>
+            </column>
+        </property>
+        <property name="tepFormatoTiempo" type="string">
+            <column name="TEP_FORMATO_TIEMPO" length="15" not-null="true">
+                <comment>El tiempo se mide en horas, d&#237;as, meses, a&#241;os</comment>
+            </column>
+        </property>
+        <property name="tepFechaInicia" type="date">
+            <column name="TEP_FECHA_INICIA" length="7" not-null="true">
+                <comment>Fecha inicio de pr&#243;rroga</comment>
+            </column>
+        </property>
+        <property name="tepFechaFin" type="date">
+            <column name="TEP_FECHA_FIN" length="7" not-null="true">
+                <comment>Fecha final de pr&#243;rroga</comment>
+            </column>
+        </property>
+        <property name="tepEstaactivo" type="char">
+            <column name="TEP_ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si est&#225; activo</comment>
+            </column>
+        </property>
+        <property name="tepCreado" type="string">
+            <column name="TEP_CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="tepFechaCreacion" type="date">
+            <column name="TEP_FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="tepActualizado" type="string">
+            <column name="TEP_ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="tepFechaActualizacion" type="date">
+            <column name="TEP_FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizaci&#243;n del registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

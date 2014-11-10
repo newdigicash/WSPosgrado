@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpHorariosOfertas" table="SGP_HORARIOS_OFERTAS" schema="POSTGRADO">
+        <comment>Esta tabla contiene la informaci&#195;&#179;n sobre los horarios de las diferentes asignaturas ofertadas</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpHorariosOfertasId">
+            <key-property name="id" type="int">
+                <column name="ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="edicionId" type="int">
+                <column name="EDICION_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="asignaturaId" type="int">
+                <column name="ASIGNATURA_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="grupo" type="int">
+                <column name="GRUPO" precision="3" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpOfertaAsignatura" class="datos.pojos.sgap.SgpOfertaAsignatura" update="false" insert="false" fetch="select">
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la carrera</comment>
+            </column>
+            <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Edici&#195;&#179;n del curso de postgrado</comment>
+            </column>
+            <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la asignatura</comment>
+            </column>
+            <column name="GRUPO" precision="3" scale="0" not-null="true">
+                <comment>Grupo para el que se asigna el horario</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="espacioFisico" class="datos.pojos.adminuc.EspaciosFisicos" fetch="select" lazy="false">
+            <column name="ESPFIS_ID" precision="5" scale="0"/>
+        </many-to-one>
+        <property name="dia" type="int">
+            <column name="DIA" precision="1" scale="0" not-null="true">
+                <comment>D&#195;&#173;a de la semana que se oferta la asignatura</comment>
+            </column>
+        </property>
+        <property name="horaInicio" type="string">
+            <column name="HORA_INICIO" length="5" not-null="true">
+                <comment>hora que se oferta la asignatura</comment>
+            </column>
+        </property>
+        <property name="horaFin" type="string">
+            <column name="HORA_FIN" length="5">
+                <comment>Hora final para la oferta de la asignatura</comment>
+            </column>
+        </property>
+        
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si el registro est&#195;&#161; activo</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#195;&#179;n de registro</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <bag name="sgpHorariosDocenteses" inverse="true" lazy="false">
+            <key>
+                <column name="HOROFE_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la oferta que hereda de la tabla horarios_ofertas</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>id de la carrera que hereda de la tabla horarios_ofertas</comment>
+                </column>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true" />
+                <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                    <comment>id de la asignatura que hereda de la tabla horarios_ofertas</comment>
+                </column>
+                <column name="GRUPO" precision="2" scale="0" not-null="true">
+                    <comment>grupo de la oferta que hereda de la tabla horarios_ofertas</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpHorariosDocentes" />
+        </bag>
+    </class>
+</hibernate-mapping>

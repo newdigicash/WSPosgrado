@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpSilaboCabeceras" table="SGP_SILABO_CABECERAS" schema="POSTGRADO">
+        <comment>Configuraci&#195;&#179;n de los componentes de los s&#195;&#173;labos</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" not-null="true" unique="true">
+                <comment>Nombre de la configuraci&#195;&#179;n para los componentes de los s&#195;&#173;labos</comment>
+            </column>
+        </property>
+        <property name="envigencia" type="char">
+            <column name="ENVIGENCIA" length="1" not-null="true">
+                <comment>Determina si la configuraci&#195;&#179;n est&#195;&#161; en vigencia</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpSilaboDetalleses" inverse="true">
+            <key>
+                <column name="SILCAB_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo de la cabecera del s&#195;&#173;labo</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpSilaboDetalles" />
+        </set>
+    </class>
+</hibernate-mapping>

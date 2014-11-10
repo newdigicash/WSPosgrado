@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/01/2014 07:52:15 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpLineasInvestigacion" table="SGP_LINEAS_INVESTIGACION" schema="POSTGRADO">
+        <comment>Las lines de investigaci&#243;n que pertenecen al plan de un curso de postgrado</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sgpPlanesCurso" class="datos.pojos.sgap.SgpPlanesCurso" fetch="select">
+            <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                <comment>Plan de carrera al que se le asigna las lineas de investigaci&#243;n</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado al que se le asigna las lineas de investigaci&#243;n</comment>
+            </column>
+        </many-to-one>
+        <property name="lineaId" type="java.lang.Integer">
+            <column name="LINEA_ID" precision="5" scale="0" not-null="false">
+                <comment>C&#243;digo de la linea de investigaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="areaId" type="int">
+            <column name="AREA_ID" precision="5" scale="0" not-null="true">
+                <comment>Area de investigaci&#243;n a la que est&#225; relacionado el programa de posgrado.</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

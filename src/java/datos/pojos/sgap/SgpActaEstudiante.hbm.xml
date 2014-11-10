@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28/03/2014 04:35:24 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpActaEstudiante" table="SGP_ACTA_ESTUDIANTE" schema="POSTGRADO">
+        <composite-id name="id" class="datos.pojos.sgap.SgpActaEstudianteId">
+            <key-property name="acePersonaId" type="string">
+                <column name="ACE_PERSONA_ID" length="15" />
+            </key-property>
+            <key-property name="aceCurposId" type="int">
+                <column name="ACE_CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="aceEdicionId" type="int">
+                <column name="ACE_EDICION_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpActas" class="datos.pojos.sgap.SgpActas" update="false" insert="false" fetch="select">
+            <column name="ACE_ACTA_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la configuraci&#243;n de acta que se utiliz&#243; para c&#225;lculos</comment>
+            </column>
+            <column name="ACE_CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del posgrado</comment>
+            </column>
+            <column name="ACE_EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la edici&#243;n</comment>
+            </column>
+        </many-to-one>
+        <property name="aceActaId" type="int">
+            <column name="ACE_ACTA_ID" precision="5" scale="0" not-null="true">
+                
+            </column>
+        </property>
+        <property name="aceNumeroActa" type="int">
+            <column name="ACE_NUMERO_ACTA" precision="5" scale="0" not-null="true">
+                <comment>N&#250;mero de acta generada</comment>
+            </column>
+        </property>
+        <property name="aceNumeroActaDescripcion" type="string">
+            <column name="ACE_NUMERO_ACTA_DESCRIPCION" length="20" not-null="true">
+                <comment>Descripci&#243;n que se forma con el n&#250;mero de acta y la dependencia del acta</comment>
+            </column>
+        </property>
+        <property name="aceDependenciaId" type="int">
+            <column name="ACE_DEPENDENCIA_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la facultad en que se obtiene el t&#237;tulo y se genera el acta de grado</comment>
+            </column>
+        </property>
+        <property name="aceNacionalidad" type="string">
+            <column name="ACE_NACIONALIDAD" length="200" not-null="true">
+                <comment>La descripci&#243;n de la nacionalidad del estudiante</comment>
+            </column>
+        </property>
+        <property name="aceFechaActa" type="string">
+            <column name="ACE_FECHA_ACTA" length="20" not-null="true">
+                <comment>Fecha completa del acta de grado</comment>
+            </column>
+        </property>
+        <property name="aceTituloId" type="int">
+            <column name="ACE_TITULO_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del t&#237;tulo que obtiene el estudiante</comment>
+            </column>
+        </property>
+        <property name="aceTitulo" type="string">
+            <column name="ACE_TITULO" length="500" not-null="true">
+                <comment>Nombre del t&#237;tulo con que se grad&#250;a el estudiante</comment>
+            </column>
+        </property>
+        <property name="aceDecanoId" type="string">
+            <column name="ACE_DECANO_ID" length="15" not-null="true">
+                <comment>Id del decano que firma el acta</comment>
+            </column>
+        </property>
+        <property name="aceSecretarioAbogId" type="string">
+            <column name="ACE_SECRETARIO_ABOG_ID" length="15" not-null="true">
+                <comment>Id del secretario abogado que firma el acta</comment>
+            </column>
+        </property>
+        <property name="aceIniciaEstudios" type="date">
+            <column name="ACE_INICIA_ESTUDIOS" length="7" not-null="true">
+                <comment>Fecha en la que inicia estudios</comment>
+            </column>
+        </property>
+        <property name="aceTerminaEstudios" type="date">
+            <column name="ACE_TERMINA_ESTUDIOS" length="7" not-null="true">
+                <comment>Fecha en la que termina los estudios</comment>
+            </column>
+        </property>
+        <property name="aceFechaCompleta" type="string">
+            <column name="ACE_FECHA_COMPLETA" length="1" not-null="true">
+                <comment>Indica si la fecha se muestra completa</comment>
+            </column>
+        </property>
+        <property name="aceFormatoImpresion" type="string">
+            <column name="ACE_FORMATO_IMPRESION" length="30">
+                <comment>Formato de impresi&#243;n del acta de grado</comment>
+            </column>
+        </property>
+        <property name="aceNombreTesis" type="string">
+            <column name="ACE_NOMBRE_TESIS" length="500" not-null="true">
+                <comment>Nombre completo del tema de tesis de grado</comment>
+            </column>
+        </property>
+        <property name="aceModalidadId" type="int">
+            <column name="ACE_MODALIDAD_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la modalidad en la que curs&#243; el posgrado</comment>
+            </column>
+        </property>
+        <property name="aceUbicacionId" type="java.lang.Integer">
+            <column name="ACE_UBICACION_ID" precision="5" scale="0">
+                <comment>Lugar en el que est&#225; ubicado el posgrado. Esto se obtiene de la tabla ubicaciones, con restricci&#243;n a nivel de cant&#243;n</comment>
+            </column>
+        </property>
+        <property name="aceDuracion" type="int">
+            <column name="ACE_DURACION" precision="5" scale="0" not-null="true">
+                <comment>Duraci&#243;n del posgrado en meses</comment>
+            </column>
+        </property>
+        <property name="aceCreditos" type="big_decimal">
+            <column name="ACE_CREDITOS" precision="5" not-null="true">
+                <comment>Cr&#233;ditos a aprobar o aprobados para el posgrado del estudiante</comment>
+            </column>
+        </property>
+        <property name="aceTotal" type="big_decimal">
+            <column name="ACE_TOTAL" precision="7" scale="4" not-null="true">
+                <comment>El total que obtuvo en el acta de grado</comment>
+            </column>
+        </property>
+        <property name="aceEquivalenciaId" type="int">
+            <column name="ACE_EQUIVALENCIA_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la equivalencia de la nota con la que se gradu&#243; el estudiante</comment>
+            </column>
+        </property>
+        <property name="aceEstado" type="string">
+            <column name="ACE_ESTADO" length="3" not-null="true">
+                <comment>Estados de actas generados GRB: Grabado, FNL: Finalizado</comment>
+            </column>
+        </property>
+        <property name="aceEstaactivo" type="char">
+            <column name="ACE_ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si esta activo</comment>
+            </column>
+        </property>
+        <property name="aceCreado" type="string">
+            <column name="ACE_CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="aceFechaCreacion" type="date">
+            <column name="ACE_FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="aceActualizado" type="string">
+            <column name="ACE_ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="aceFechaActualizacion" type="date">
+            <column name="ACE_FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <set name="sgpActaEstudianteDetalles" inverse="true">
+            <key>
+                <column name="AED_PERSONA_ID" length="15" not-null="true">
+                    <comment>identificaci&#243;n de personas</comment>
+                </column>
+                <column name="AED_CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del posgrado</comment>
+                </column>
+                <column name="AED_EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la edici&#243;n</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpActaEstudianteDetalle" />
+        </set>
+        <set name="sgpActaAutorizacions" inverse="true">
+            <key>
+                <column name="ACA_PERSONA_ID" length="15" not-null="true">
+                    <comment>identificaci&#243;n de la persona</comment>
+                </column>
+                <column name="ACA_CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del posgrado</comment>
+                </column>
+                <column name="ACA_EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la edici&#243;n</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpActaAutorizacion" />
+        </set>
+    </class>
+</hibernate-mapping>

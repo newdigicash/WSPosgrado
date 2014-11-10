@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/01/2012 05:32:37 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.PrtParentescos" table="PRT_PARENTESCOS" schema="ADMINUC">
+        <comment>Tabla que tiene los parentescos de una persona</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" not-null="true" unique="true">
+                <comment>Nombre del parentesco</comment>
+            </column>
+        </property>
+        <property name="aplicaEncuesta" type="char">
+            <column name="APLICA_ENCUESTA" length="1" not-null="true">
+                <comment>Determina si el parentesco aplica 'S' o no 'N' a la encuesta de discapacidades</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="prtParientesDiscapacitadoses" inverse="true">
+            <key>
+                <column name="PARENTESCO_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#243;digo del parentesco que tiene discapacidad</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.adminuc.PrtParientesDiscapacitados" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/12/2011 05:07:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.InstitucionesEducativas" table="INSTITUCIONES_EDUCATIVAS" schema="ADMINUC">
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="150" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" length="100" />
+        </property>
+        <property name="numeroDireccion" type="string">
+            <column name="NUMERO_DIRECCION" length="10" />
+        </property>
+        <property name="casillaPostal" type="string">
+            <column name="CASILLA_POSTAL" length="15" />
+        </property>
+        <property name="url" type="string">
+            <column name="URL" length="50" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="50" />
+        </property>
+        <property name="ubicacionId" type="int">
+            <column name="UBICACION_ID" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="TIPO" length="3" not-null="true" />
+        </property>
+        <property name="nivel" type="string">
+            <column name="NIVEL" length="3" not-null="true" />
+        </property>
+        <property name="categoria" type="byte">
+            <column name="CATEGORIA" precision="2" scale="0" not-null="true" />
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="catinsId" type="java.lang.Integer">
+            <column name="CATINS_ID" precision="5" scale="0">
+                <comment>ID de la categoria de la instituci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="tipinsId" type="java.lang.Integer">
+            <column name="TIPINS_ID" precision="5" scale="0">
+                <comment>ID del tipo de instituci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <set name="titulosProfesionaleses" inverse="true">
+            <key>
+                <column name="UNIVER_ID" precision="5" scale="0" />
+            </key>
+            <one-to-many class="datos.pojos.adminuc.TitulosProfesionales" />
+        </set>
+    </class>
+</hibernate-mapping>

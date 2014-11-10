@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/01/2012 05:32:37 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.PrtDiscapacitados" table="PRT_DISCAPACITADOS" schema="ADMINUC">
+        <id name="personaId" type="string">
+            <column name="PERSONA_ID" length="15" />
+            <generator class="assigned" />
+        </id>
+        <property name="tieneCarne" type="char">
+            <column name="TIENE_CARNE" length="1" not-null="true">
+                <comment>Determina si la persona tiene carn&#233;</comment>
+            </column>
+        </property>
+        <property name="ayudaUniversidad" type="char">
+            <column name="AYUDA_UNIVERSIDAD" length="1" not-null="true">
+            </column>
+        </property>
+        <property name="porcentaje" type="short">
+            <column name="PORCENTAJE" precision="3" scale="0" not-null="true" />
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="numeroCarnet" type="string"> 
+            <column name="NUMERO_CARNET" length="50"/> 
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="verificado" type="string"> 
+            <column name="VERIFICADO" length="1" not-null="true"/> 
+        </property>
+        <bag name="prtPersonasDiscapacidadeses" inverse="true" cascade="all" lazy="false">
+            <key>
+                <column name="PERSONA_ID" length="15" not-null="true">
+                    <comment>Persona que tiene discapacidad</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.adminuc.PrtPersonasDiscapacidades" />
+        </bag>
+
+    </class>
+</hibernate-mapping>

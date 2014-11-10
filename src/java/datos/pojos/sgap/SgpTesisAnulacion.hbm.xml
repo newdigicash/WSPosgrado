@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/04/2014 10:30:06 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpTesisAnulacion" table="SGP_TESIS_ANULACION" schema="POSTGRADO">
+        <id name="tanId" type="int">
+            <column name="TAN_ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sgpTesis" class="datos.pojos.sgap.SgpTesis" fetch="select">
+            <column name="TAN_TESIS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la tesis</comment>
+            </column>
+        </many-to-one>
+        <property name="tanFechaAprobacion" type="date">
+            <column name="TAN_FECHA_APROBACION" length="7" not-null="true">
+                <comment>Fecha de aprobaci&#243;n de la anulaci&#243;n de tesis</comment>
+            </column>
+        </property>
+        <property name="tanNroDocumento" type="string">
+            <column name="TAN_NRO_DOCUMENTO" length="20" not-null="true">
+                <comment>N&#250;mero de documento con el que se anula la tesis</comment>
+            </column>
+        </property>
+        <property name="tanMotivo" type="string">
+            <column name="TAN_MOTIVO" length="300">
+                <comment>Motivo de Anulaci&#243;n de tesis</comment>
+            </column>
+        </property>
+        <property name="tanEstaactivo" type="char">
+            <column name="TAN_ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si esta activo</comment>
+            </column>
+        </property>
+        <property name="tanCreado" type="string">
+            <column name="TAN_CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="tanFechaCreacion" type="date">
+            <column name="TAN_FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="tanActualizado" type="string">
+            <column name="TAN_ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="tanFechaActualizacion" type="date">
+            <column name="TAN_FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizaci&#243;n del registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

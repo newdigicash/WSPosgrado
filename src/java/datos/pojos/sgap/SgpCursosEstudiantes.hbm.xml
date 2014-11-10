@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpCursosEstudiantes" table="SGP_CURSOS__ESTUDIANTES" schema="POSTGRADO">
+        <composite-id name="id" class="datos.pojos.sgap.SgpCursosEstudiantesId">
+            <key-property name="id" type="int">
+                <column name="ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="personaId" type="string">
+                <column name="PERSONA_ID" length="15" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpEdiciones" class="datos.pojos.sgap.SgpEdiciones" fetch="select">
+            <column name="EDICION_ID" precision="5" scale="0" not-null="true" />
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado que se le asigna al estudiante</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpSecciones" class="datos.pojos.sgap.SgpSecciones" fetch="select">
+            <column name="SECCION_ID" precision="2" scale="0">
+                <comment>Secci&#195;&#179;n a la que pertenece el estudiante</comment>
+            </column>
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="ESTADO" length="3" not-null="true">
+                <comment>Estado en el que se encuentra el estudiante. INS: inscrito, CUR: cursando, EGR: egresado, GRA: graduado, RET: retirado</comment>
+            </column>
+        </property>
+        <property name="placurId" type="int">
+            <column name="PLACUR_ID" precision="5" scale="0" >
+            </column>
+        </property>
+        <property name="mencionId" type="int">
+            <column name="MENCION_ID" precision="5" scale="0" >
+            </column>
+        </property>
+        <property name="mallaId" type="int">
+            <column name="MALLA_ID" precision="5" scale="0" >
+            </column>
+        </property>
+        <property name="perlecId" type="int">
+            <column name="PERLEC_ID" precision="5" scale="0" >
+                <comment>Periodo en el que se registra su graduaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="tieneBeca" type="char">
+            <column name="TIENE_BECA" length="1" not-null="true" />
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpCursosPostgrado" table="SGP_CURSOS_POSTGRADO" schema="POSTGRADO">
+        <comment>Tabla que registra los cursos de postgrados de la Universidad de Cuenca</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sgpDocumentosBinarios" class="datos.pojos.sgap.SgpDocumentosBinarios" fetch="select">
+            <column name="APROBACION_CONSEJO_PDF" precision="5" scale="0" not-null="true">
+                <comment>Id del documento guardado en formato PDF</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpSubareas" class="datos.pojos.sgap.SgpSubareas" fetch="select">
+            <column name="SUBARE_ID" precision="5" scale="0" not-null="true">
+                <comment>Sub &#195;&#161;rea de conocimiento del curso de postgrado</comment>
+            </column>
+        </many-to-one>
+        
+        <many-to-one name="dependencia" class="datos.pojos.adminuc.Dependencias" lazy="false" fetch="select">
+            <column name="DEPENDENCIA_ID" precision="5" scale="0" not-null="true">
+                <comment>Dependencia encargada del curso</comment>
+            </column>
+        </many-to-one>
+        
+        <many-to-one name="titulo" class="datos.pojos.adminuc.Titulos" lazy="false" fetch="select">
+            <column name="TITULO_ID" precision="5" scale="0" not-null="true">
+                <comment>Titulo que oferta el posgrado</comment>
+            </column>
+        </many-to-one>
+       
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="200" not-null="true">
+                <comment>Nombre del curso de postgrado</comment>
+            </column>
+        </property>
+        <property name="abreviatura" type="string">
+            <column name="ABREVIATURA" length="10">
+                <comment>Abreviatura del curso de postgrado</comment>
+            </column>
+        </property>
+        
+        <property name="nivforId" type="int">
+            <column name="NIVFOR_ID" precision="5" scale="0" not-null="true">
+                <comment>Nivel de formaci&#195;&#179;n del curso de postgrado</comment>
+            </column>
+        </property>
+        <property name="fechaAprobacionFacultad" type="date">
+            <column name="FECHA_APROBACION_FACULTAD" length="7" not-null="true">
+                <comment>Fecha de aprobaci&#195;&#179;n en la Facultad</comment>
+            </column>
+        </property>
+        <property name="fechaAprobacionDireccion" type="date">
+            <column name="FECHA_APROBACION_DIRECCION" length="7" not-null="true">
+                <comment>Fecha de aprobaci&#195;&#179;n en la direcci&#195;&#179;n de postgrados</comment>
+            </column>
+        </property>
+        <property name="nroResolucionConsejo" type="string">
+            <column name="NRO_RESOLUCION_CONSEJO" length="20" not-null="true">
+                <comment>N&#195;&#186;mero de resoluci&#195;&#179;n del Consejo Universitario</comment>
+            </column>
+        </property>
+        <property name="fechaAprobacionConsejo" type="date">
+            <column name="FECHA_APROBACION_CONSEJO" length="7" not-null="true">
+                <comment>Fecha de aprobaci&#195;&#179;n del Consejo Universitario</comment>
+            </column>
+        </property>
+        <property name="estado" type="string">
+            <column name="ESTADO" length="3" not-null="true">
+                <comment>Estados del curso: FUN: Funcionando Normalmente; SUS: Suspendido hasta nuevas matr&#195;&#173;culas ; SIN: Sin actividad acad&#195;&#169;mica.</comment>
+            </column>
+        </property>
+        <property name="rolId" type="string">
+            <column name="ROL_ID" length="3">
+                <comment>Rol que van a tomar los estudiantes nuevos del curso de postgrado</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="timestamp">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpTemases" inverse="true">
+            <key>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>El tema pertenece a postgrados</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpTemas" />
+        </set>
+        <set name="sgpPlanesCursos" inverse="true">
+            <key>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del curso de postgrado al que pertenece el plan curricular</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpPlanesCurso" />
+        </set>
+        <set name="sgpResolucionesSenescyts" inverse="true">
+            <key>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que pertenece las resoluciones</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpResolucionesSenescyt" />
+        </set>
+        <set name="sgpMatriculases" inverse="true">
+            <key>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>ID de la carrera</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpMatriculas" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/12/2013 08:22:37 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpUnidadesMalla" table="SGP_UNIDADES_MALLA" schema="POSTGRADO">
+        <comment>Unidad: es la forma de organizar las asignaturas, esto para configurar el perfil, a nivel de malla, para el egreso/grado del estudiante.</comment>
+        <id name="unmId" type="int">
+            <column name="UNM_ID" precision="5" scale="0" />
+             <generator class="sequence">
+                <param name="sequence">SEQ_UNIDADESMALLA</param> 
+            </generator>
+        </id>
+        <many-to-one name="sgpMenciones" class="datos.pojos.sgap.SgpMenciones" fetch="select">
+            <column name="UNM_MENCION_ID" precision="5" scale="0" not-null="false">
+                <comment>Menci&#243;n a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n). Si la menci&#243;n es nula, la configuraci&#243;n se
+                aplica a nivel de malla caso contrario se aplica a la menci&#243;n.</comment>
+            </column>
+            <column name="UNM_MALLA_ID" precision="5" scale="0" not-null="true">
+                <comment>Malla a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n).</comment>
+            </column>
+            <column name="UNM_PLACUR_ID" precision="5" scale="0" not-null="true">
+                <comment>Plan al que pertenece la malla, a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n).</comment>
+            </column>
+            <column name="UNM_CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado al que pertenece la malla, a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n).</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpMallas" class="datos.pojos.sgap.SgpMallas" update="false" insert="false" fetch="select">
+            <column name="UNM_MALLA_ID" precision="5" scale="0" not-null="true">
+                <comment>Malla a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n).</comment>
+            </column>
+            <column name="UNM_PLACUR_ID" precision="5" scale="0" not-null="true">
+                <comment>Plan al que pertenece la malla, a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n).</comment>
+            </column>
+            <column name="UNM_CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado al que pertenece la malla, a la que se aplica la configuraci&#243;n de paquetes (unidades de organizaci&#243;n).</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpUnidadesOrganizacion" class="datos.pojos.sgap.SgpUnidadesOrganizacion" fetch="select">
+            <column name="UNM_UNIORG_ID" precision="5" scale="0" not-null="true">
+                <comment>Unidad de organizaci&#243;n curricular, sobre el cual se va a empaquetar las asignaturas.</comment>
+            </column>
+        </many-to-one>
+        <property name="uniMinimoHorasObligatorias" type="int">
+            <column name="UNI_MINIMO_HORAS_OBLIGATORIAS" precision="5" scale="0" not-null="true">
+                <comment>M&#237;nimo de horas obligatorias que debe cumplir el estudiante para graduarse.</comment>
+            </column>
+        </property>
+        <property name="uniMinimoHorasElectivas" type="int">
+            <column name="UNI_MINIMO_HORAS_ELECTIVAS" precision="5" scale="0" not-null="true">
+                <comment>M&#237;nimo de horas electivas que debe cumplir el estudiante para graduarse.</comment>
+            </column>
+        </property>
+        <property name="uniMinimoHorasUnidad" type="int">
+            <column name="UNI_MINIMO_HORAS_UNIDAD" precision="5" scale="0" not-null="true">
+                <comment>M&#237;nimo total horas que debe cumplir el estudiante para graduarse.</comment>
+            </column>
+        </property>
+        <property name="uniSeValida" type="char">
+            <column name="UNI_SE_VALIDA" length="1" not-null="true">
+                <comment>Campo que nos indica si la unidad va a ser utilizar para validar si un estudiante egresa.</comment>
+            </column>
+        </property>
+        <property name="uniEstaactivo" type="char">
+            <column name="UNI_ESTAACTIVO" length="1" not-null="true">
+                <comment>Campo de eliminaci&#243;n l&#243;gica.</comment>
+            </column>
+        </property>
+        <property name="uniCreado" type="string">
+            <column name="UNI_CREADO" length="20" not-null="true">
+                <comment>Campo de auditor&#237;a a nivel de tupla, que indica el usuario que creo por primera ves la tupla.</comment>
+            </column>
+        </property>
+        <property name="uniFechaCreacion" type="date">
+            <column name="UNI_FECHA_CREACION" length="7" not-null="true">
+                <comment>Campo de auditor&#237;a a nivel de tupla, que indica la fecha en la que se cre&#243; por primera vez la tupla.</comment>
+            </column>
+        </property>
+        <property name="uniActualizado" type="string">
+            <column name="UNI_ACTUALIZADO" length="20">
+                <comment>Campo de auditor&#237;a a nivel de tupla, que indica el usuario que modific&#243; la &#250;ltima vez la tupla.</comment>
+            </column>
+        </property>
+        <property name="uniFechaActualizacion" type="date">
+            <column name="UNI_FECHA_ACTUALIZACION" length="7">
+                <comment>Campo de auditor&#237;a a nivel de tupla, que indica la fecha en la que se modific&#243; la &#250;ltima vez la tupla.</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

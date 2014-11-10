@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/01/2012 09:23:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.academico.SgaPeriodosLectivos" table="SGA_PERIODOS_LECTIVOS" schema="ACADEMICO">
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="fechainicio" type="date">
+            <column name="FECHAINICIO" length="7" not-null="true" />
+        </property>
+        <property name="fechafin" type="date">
+            <column name="FECHAFIN" length="7" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="50" not-null="true">
+                <comment>Descripci&#195;&#179;n del periodo</comment>
+            </column>
+        </property>
+        <property name="envigencia" type="char">
+            <column name="ENVIGENCIA" length="1" not-null="true">
+                <comment>Indica si el periodo est&#195;&#161; en vigencia</comment>
+            </column>
+        </property>
+        <property name="enuso" type="char">
+            <column name="ENUSO" length="1" not-null="true">
+                <comment>Indica si el periodo est&#195;&#161; en uso</comment>
+            </column>
+        </property>
+        <property name="cerrado" type="char">
+            <column name="CERRADO" length="1" not-null="true">
+                <comment>Indica si el periodo est&#195;&#161; cerrado</comment>
+            </column>
+        </property>
+        <property name="descripcionanual" type="string">
+            <column name="DESCRIPCIONANUAL" length="50">
+                <comment>Descripcion para el periodo anual</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="abreviatura" type="string">
+            <column name="ABREVIATURA" length="15" not-null="true">
+                <comment>Abreviatura del periodo lectivo</comment>
+            </column>
+        </property>
+        <property name="vigenteInscripciones" type="java.lang.Character">
+            <column name="VIGENTE_INSCRIPCIONES" length="1">
+                <comment>Indica si el periodo aunque no est&#195;&#169; vigente permita inscripciones si el campo tiene el valor S.</comment>
+            </column>
+        </property>
+        <property name="vigenteSocioeconomica" type="java.lang.Character">
+            <column name="VIGENTE_SOCIOECONOMICA" length="1">
+                <comment>Indica si el periodo aunque no est&#195;&#169; vigente permita ingresar ficha socioeconomica si el campo tiene el valor S.</comment>
+            </column>
+        </property>
+        <property name="nombreInternado" type="string">
+            <column name="NOMBRE_INTERNADO" length="100">
+                <comment>Nombre del periodo que va a tener para el internado. Esto porque en el internado tien otro nombre el periodo.</comment>
+            </column>
+        </property>
+        <property name="vigenteCalificaciones" type="java.lang.Character">
+            <column name="VIGENTE_CALIFICACIONES" length="1">
+                <comment>Indica si el periodo aunque no est&#195;&#169; vigente permita ingresar calificaciones a los docentes, si el campo tiene el valor S.</comment>
+            </column>
+        </property>
+        <property name="abreviaturaanual" type="string">
+            <column name="ABREVIATURAANUAL" length="15" />
+        </property>
+        <property name="abreviaturainternado" type="string">
+            <column name="ABREVIATURAINTERNADO" length="15" />
+        </property>
+    </class>
+</hibernate-mapping>

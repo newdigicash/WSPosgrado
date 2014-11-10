@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpFormasEvaluacion" table="SGP_FORMAS_EVALUACION" schema="POSTGRADO">
+        <comment>Tabla que almacena las diferentes formas de evaluaci&#195;&#179;n de los cursos de postgrado</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" not-null="true">
+                <comment>Denominaci&#195;&#179;n de la forma de evaluaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="300" not-null="true">
+                <comment>Descripci&#195;&#179;n de ayuda sobre la forma de evaluaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="numeroAportes" type="byte">
+            <column name="NUMERO_APORTES" precision="2" scale="0" not-null="true">
+                <comment>N&#195;&#186;mero de aportes que va a tener la forma de evaluaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="minimoAprobar" type="big_decimal">
+            <column name="MINIMO_APROBAR" precision="7" scale="4" />
+        </property>
+        <property name="tipoCalificacion" type="string">
+            <column name="TIPO_CALIFICACION" length="3" not-null="true">
+                <comment>Tipo de calificaci&#195;&#179;n cuantitativa 'CNT' o cualitativa 'CLT'</comment>
+            </column>
+        </property>
+        <property name="faltasPermitidas" type="int">
+            <column name="FALTAS_PERMITIDAS" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="maximaCalificacion" type="big_decimal">
+            <column name="MAXIMA_CALIFICACION" precision="7" scale="4">
+                <comment>M&#195;&#161;xima calificaci&#195;&#179;n para la nota final</comment>
+            </column>
+        </property>
+        <property name="nroDecimales" type="byte">
+            <column name="NRO_DECIMALES" precision="1" scale="0">
+                <comment>N&#195;&#186;mero de decimales que van a tener los aportes</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="abreviatura" type="string">
+            <column name="ABREVIATURA" length="10">
+                <comment>Abreviatura de la Forma de Evaluaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="enVigencia" type="string">
+            <column name="EN_VIGENCIA" length="1">
+                <comment>En Vigencia, S:SI &#243; N:NO</comment>
+            </column>
+        </property>
+        <property name="enUso" type="string">
+            <column name="EN_USO" length="1">
+                <comment>En uso, S:SI o N:NO</comment>
+            </column>
+        </property>
+        <set name="sgpRegistrosCabecerases" inverse="true">
+            <key>
+                <column name="FOREVA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la forma de evaluaci&#195;&#179;n a la que hacemos referencia</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpRegistrosCabeceras" />
+        </set>
+        <set name="sgpAsignaturasMallases" inverse="true">
+            <key>
+                <column name="FOREVA_ID" precision="5" scale="0" not-null="true">
+                    <comment>La forma en el que se va a evaluar la asignatura</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpAsignaturasMallas" />
+        </set>
+        <set name="sgpEvaluacionesAporteses" inverse="true">
+            <key>
+                <column name="FOREVA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la forma de evaluaci&#195;&#179;n</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpEvaluacionesAportes" />
+        </set>
+        <set name="sgpEvaluacionesEstadoses" inverse="true">
+            <key>
+                <column name="FOREVA_ID" precision="5" scale="0" not-null="true">
+                    <comment>La forma de evaluaci&#195;&#179;n a la que est&#195;&#161; relacionada la regla de aprobaci&#195;&#179;n.</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpEvaluacionesEstados" />
+        </set>
+        <set name="sgpMallases" inverse="true">
+            <key>
+                <column name="FOREVA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Forma de evaluaci&#195;&#179;n que predomina en la malla</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpMallas" />
+        </set>
+    </class>
+</hibernate-mapping>

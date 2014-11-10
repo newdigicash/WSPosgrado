@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/08/2011 09:18:13 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.TiposTelefonos" table="TIPOS_TELEFONOS" schema="ADMINUC">
+        <comment>Tipos de Tel&#233;fonos</comment>
+        <id name="id" type="string">
+            <column name="ID" length="3" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="20" not-null="true">
+                <comment>Descripci&#243;n</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Est&#225; activo</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creacion del registro</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Usuario de actualizacion de registro</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizacion de registro</comment>
+            </column>
+        </property>
+        
+         <!--bag lazy="false" name="telefonosPersonas" inverse="true">
+            <key>
+                <column name="PERSON_ID" length="15" not-null="true">
+                    <comment>ID DE LA PERSONA</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.adminuc.TelefonosPersonas" />
+        </bag-->       
+        
+    </class>
+</hibernate-mapping>

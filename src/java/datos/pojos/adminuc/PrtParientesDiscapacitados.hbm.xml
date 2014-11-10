@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/01/2012 05:32:37 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.PrtParientesDiscapacitados" table="PRT_PARIENTES_DISCAPACITADOS" schema="ADMINUC">
+        <comment>Tabla que guarda los parientes de una persona que tienen discapacidad</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">ADMINUC.SEQ_PRT_PAR_DISCAPACITADOS</param> 
+            </generator>
+        </id>
+        <many-to-one name="prtDiscapacitados" class="datos.pojos.adminuc.PersonasNaturales" fetch="select" lazy="false">
+            <column name="PERSONA_ID" length="15" not-null="true">
+                <comment>Persona que tiene parientes con discapacidad</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="prtParentescos" class="datos.pojos.adminuc.PrtParentescos" fetch="select" lazy="false">
+            <column name="PARENTESCO_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#243;digo del parentesco que tiene discapacidad</comment>
+            </column>
+        </many-to-one>
+        <property name="pariente" type="string">
+            <column name="PARIENTE" length="50" />
+        </property>
+        <property name="tieneCarne" type="char">
+            <column name="TIENE_CARNE" length="1" not-null="true">
+                <comment>Determina si el pariente tiene 'S' o no 'N' carn&#233; de discapacidad</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7"  />
+        </property>
+        <property name="porcentajeDiscapacidad" type="short">
+            <column name="PORCENTAJE" precision="3" scale="0" not-null="true">
+                <comment>Porcentaje de discapacidad que tiene el pariente</comment>
+            </column>
+        </property>
+        <property name="numCarnet" type="string">
+            <column name="NUM_CARNET" length="50"  />
+        </property>
+        <property name="ayudaUniversidad" type="char">
+            <column name="AYUDA_UNIVERSIDAD" length="1" not-null="true">
+            </column>
+        </property>
+        <property name="verificado" type="string">
+            <column name="VERIFICADO" length="1" not-null="true" />
+        </property>
+        <bag name="prtDiscapacidadesFamiliareses" inverse="true" cascade="all" lazy="false">
+            <key>
+                <column name="PARDIS_ID" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="datos.pojos.adminuc.PrtDiscapacidadesFamiliares" />
+        </bag>
+    </class>
+</hibernate-mapping>

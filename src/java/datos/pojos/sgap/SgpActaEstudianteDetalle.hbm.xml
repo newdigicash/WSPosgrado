@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/02/2014 04:06:18 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpActaEstudianteDetalle" table="SGP_ACTA_ESTUDIANTE_DETALLE" schema="POSTGRADO">
+        <composite-id name="id" class="datos.pojos.sgap.SgpActaEstudianteDetalleId">
+            <key-property name="aedId" type="int">
+                <column name="AED_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="aedPersonaId" type="string">
+                <column name="AED_PERSONA_ID" length="15" />
+            </key-property>
+            <key-property name="aedCurposId" type="int">
+                <column name="AED_CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="aedEdicionId" type="int">
+                <column name="AED_EDICION_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpActaEstudiante" class="datos.pojos.sgap.SgpActaEstudiante" update="false" insert="false" fetch="select">
+            <column name="AED_PERSONA_ID" length="15" not-null="true">
+                <comment>identificaci&#243;n de personas</comment>
+            </column>
+            <column name="AED_CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del posgrado</comment>
+            </column>
+            <column name="AED_EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la edici&#243;n</comment>
+            </column>
+        </many-to-one>
+        <property name="aedNombre" type="string">
+            <column name="AED_NOMBRE" length="400" not-null="true">
+                <comment>Nombre de la Edici&#243;n</comment>
+            </column>
+        </property>
+        <property name="aedValor" type="big_decimal">
+            <column name="AED_VALOR" precision="7" scale="4" not-null="true">
+                <comment>Valor del detalle del acta, calculado con la f&#243;rmula de la configuraci&#243;n</comment>
+            </column>
+        </property>
+        <property name="aedPorcentajeIncidencia" type="java.lang.Short">
+            <column name="AED_PORCENTAJE_INCIDENCIA" precision="3" scale="0">
+                <comment>Porcentaje de incidencia en el valor total</comment>
+            </column>
+        </property>
+        <property name="aedEstaactivo" type="char">
+            <column name="AED_ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si esta activo</comment>
+            </column>
+        </property>
+        <property name="aedCreado" type="string">
+            <column name="AED_CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="aedFechaCreacion" type="date">
+            <column name="AED_FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="aedActualizado" type="string">
+            <column name="AED_ACTUALIZADO" length="20">
+                <comment>Usuario que modifica el registro</comment>
+            </column>
+        </property>
+        <property name="aedFechaActualizacion" type="date">
+            <column name="AED_FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de &#250;ltima modificaci&#243;n</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

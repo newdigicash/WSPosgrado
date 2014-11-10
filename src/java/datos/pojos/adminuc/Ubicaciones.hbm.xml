@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/12/2011 05:07:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.Ubicaciones" table="UBICACIONES" schema="ADMINUC">
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="50" not-null="true" />
+        </property>
+        <property name="abreviatura" type="string">
+            <column name="ABREVIATURA" length="5" />
+        </property>
+        <property name="nacionalidad" type="string">
+            <column name="NACIONALIDAD" length="100" />
+        </property>
+        <property name="continente" type="string">
+            <column name="CONTINENTE" length="1" not-null="true" />
+        </property>
+        <property name="regionGeo" type="string">
+            <column name="REGION_GEO" length="1" not-null="true" />
+        </property>
+        <property name="escapital" type="string">
+            <column name="ESCAPITAL" length="1" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="TIPO" length="1" />
+        </property>
+        <property name="nivel" type="java.lang.Long">
+            <column name="NIVEL" precision="10" scale="0" />
+        </property>
+        <property name="padre" type="int">
+            <column name="PADRE" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="codigoOficial" type="string">
+            <column name="CODIGO_OFICIAL" length="5" />
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="idZona" type="string">
+            <column name="ID_ZONA" length="1" />
+        </property>
+        <property name="codigoSri" type="string">
+            <column name="CODIGO_SRI" length="6" />
+        </property>
+        <set name="titulosProfesionaleses" inverse="true">
+            <key>
+                <column name="UBICAC_ID" precision="5" scale="0" />
+            </key>
+            <one-to-many class="datos.pojos.adminuc.TitulosProfesionales" />
+        </set>
+    </class>
+</hibernate-mapping>

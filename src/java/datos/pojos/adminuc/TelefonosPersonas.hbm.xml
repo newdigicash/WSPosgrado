@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-jul-2011 8:26:58 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.TelefonosPersonas" schema="ADMINUC" table="TELEFONOS_PERSONAS">
+        <id name="id" type="int">
+            <column name="ID"/>
+            <generator class="assigned"></generator>
+        </id>
+    
+        <many-to-one class="datos.pojos.adminuc.Personas" fetch="select" lazy="false" name="personas">
+            <column length="15" name="PERSON_ID"/>
+        </many-to-one>
+        <many-to-one class="datos.pojos.adminuc.TiposTelefonos" fetch="select" lazy="false" name="tiposTelefonos">
+            <column name="TIPTEL_ID" precision="5" scale="0"/>
+        </many-to-one>
+        <property name="numeroTelefono" type="string">
+            <column length="15" name="NUMERO_TELEFONO"/>
+        </property>
+        <property name="estaactivo" type="string">
+            <column length="1" name="ESTAACTIVO"/>
+        </property>
+        <property name="creado" type="string">
+            <column length="50" name="CREADO"/>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column length="7" name="FECHA_CREACION"/>
+        </property>
+        <property name="actualizado" type="string">
+            <column length="50" name="ACTUALIZADO"/>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column length="7" name="FECHA_ACTUALIZACION"/>
+        </property>
+    </class>
+</hibernate-mapping>

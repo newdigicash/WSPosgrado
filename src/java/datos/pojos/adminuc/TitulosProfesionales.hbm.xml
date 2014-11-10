@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/01/2012 03:56:48 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.TitulosProfesionales" table="TITULOS_PROFESIONALES" schema="ADMINUC">
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" not-null="true" />
+            <generator class="sequence">
+                <param name="sequence">ADMINUC.SEQ_TITULOS_PROFESIONALES</param>
+            </generator>
+        </id>
+        <many-to-one name="institucionesEducativas" class="datos.pojos.adminuc.InstitucionesEducativas" fetch="select" lazy="false">
+            <column name="UNIVER_ID" precision="5" scale="0" />
+        </many-to-one>
+        <many-to-one name="titulos" class="datos.pojos.adminuc.Titulos" fetch="select" lazy="false">
+            <column name="TIPTIT_ID" precision="5" scale="0" />
+        </many-to-one>
+        <many-to-one name="ubicaciones" class="datos.pojos.adminuc.Ubicaciones" fetch="select" lazy="false">
+            <column name="UBICAC_ID" precision="5" scale="0" />
+        </many-to-one>
+        <many-to-one name="nivelesFormacion" class="datos.pojos.adminuc.NivelesFormacion" fetch="select" lazy="false">
+            <column name="NIVEL_ID" precision="5" scale="0">
+                <comment>nivel de la tabla niveles de formacion</comment>
+            </column>
+        </many-to-one>
+        <property name="personId" type="string">
+            <column name="PERSON_ID" length="15" />
+        </property>
+        <property name="universidad" type="string">
+            <column name="UNIVERSIDAD" length="100" />
+        </property>
+        <property name="pais" type="string">
+            <column name="PAIS" length="60" not-null="true" />
+        </property>
+        <property name="anioGraduacion" type="string">
+            <column name="ANIO_GRADUACION" length="5" />
+        </property>
+        <property name="numRegistro" type="string">
+            <column name="NUM_REGISTRO" length="20" />
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="abreviatura" type="string">
+            <column name="ABREVIATURA" length="20" />
+        </property>
+        <property name="orden" type="java.lang.Integer">
+            <column name="ORDEN" precision="5" scale="0" />
+        </property>
+        <property name="temaDisertacion" type="string">
+            <column name="TEMA_DISERTACION" length="200" />
+        </property>
+        <property name="verificado" type="string">
+            <column name="VERIFICADO" length="1">
+                <comment>S=SI, N=NO</comment>
+            </column>
+        </property>
+        <property name="duracion" type="string">
+            <column name="DURACION" length="5"/>
+        </property>
+    </class>
+</hibernate-mapping>

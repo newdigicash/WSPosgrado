@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/04/2014 10:30:06 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpTesisTribunal" table="SGP_TESIS_TRIBUNAL" schema="POSTGRADO">
+        <composite-id name="id" class="datos.pojos.sgap.SgpTesisTribunalId">
+            <key-property name="tetId" type="short">
+                <column name="TET_ID" precision="3" scale="0" />
+            </key-property>
+            <key-property name="tetPersonaId" type="string">
+                <column name="TET_PERSONA_ID" length="15" />
+            </key-property>
+            <key-property name="tetTesisId" type="int">
+                <column name="TET_TESIS_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpTesis" class="datos.pojos.sgap.SgpTesis" update="false" insert="false" fetch="select" lazy="false">
+            <column name="TET_TESIS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del trabajo de tesis</comment>
+            </column>
+        </many-to-one>
+        <property name="tetEstaactivo" type="char">
+            <column name="TET_ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si esta activo</comment>
+            </column>
+        </property>
+        <property name="tetCreado" type="string">
+            <column name="TET_CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="tetFechaCreacion" type="date">
+            <column name="TET_FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="tetActualizado" type="string">
+            <column name="TET_ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="tetFechaActualizacion" type="date">
+            <column name="TET_FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizaci&#243;n del registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/08/2011 09:18:13 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.PersonasJuridicas" table="PERSONAS_JURIDICAS" schema="ADMINUC">
+        <comment>Personas Jur&#239;dicas</comment>
+        <id name="personId" type="string">
+            <column name="PERSON_ID" length="15" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="personas" class="datos.pojos.adminuc.Personas" update="false" insert="false" fetch="select">
+            <column name="PERSON_ID" length="15" not-null="true" unique="true">
+                <comment>ID de Persona</comment>
+            </column>
+        </many-to-one>
+        <property name="dedpjuId" type="string">
+            <column name="DEDPJU_ID" length="3" not-null="true">
+                <comment>Dedicaci&#243;n de la instituci&#243;n</comment>
+            </column>
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="100" not-null="true">
+                <comment>Descripci&#243;n</comment>
+            </column>
+        </property>
+        <property name="anioInicio" type="short">
+            <column name="ANIO_INICIO" precision="4" scale="0" not-null="true">
+                <comment>A&#241;o de inicio de actividad</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Est&#225; activo</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creacion del registro</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Usuario de actualizacion de registro</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizacion de registro</comment>
+            </column>
+        </property>
+        
+    </class>
+</hibernate-mapping>

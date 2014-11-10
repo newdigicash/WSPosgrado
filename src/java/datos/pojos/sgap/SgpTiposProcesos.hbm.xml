@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12/12/2013 10:26:45 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpTiposProcesos" table="SGP_TIPOS_PROCESOS" schema="POSTGRADO">
+        <comment>Tipos de procesos que se pueden hacer autorizaciones</comment>
+        <id name="tipId" type="short">
+            <column name="TIP_ID" precision="3" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="tipNombre" type="string">
+            <column name="TIP_NOMBRE" length="100" not-null="true" unique="true">
+                <comment>Nombre del tipo de proceso para documentos de autorizaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="tipOrden" type="short">
+            <column name="TIP_ORDEN" precision="3" scale="0" not-null="true">
+                <comment>Orden en el que aparecer&#225;n en pantalla</comment>
+            </column>
+        </property>
+        <property name="tipEstaactivo" type="char">
+            <column name="TIP_ESTAACTIVO" length="1" not-null="true">
+                <comment>Campo que indica si el registro est&#225; activo</comment>
+            </column>
+        </property>
+        <property name="tipCreado" type="string">
+            <column name="TIP_CREADO" length="20" not-null="true">
+                <comment>Campo de auditor&#237;a b&#225;sica</comment>
+            </column>
+        </property>
+        <property name="tipFechaCreacion" type="date">
+            <column name="TIP_FECHA_CREACION" length="7" not-null="true">
+                <comment>Campo de auditor&#237;a b&#225;sica</comment>
+            </column>
+        </property>
+        <property name="tipActualizado" type="string">
+            <column name="TIP_ACTUALIZADO" length="20">
+                <comment>Campo de auditor&#237;a b&#225;sica</comment>
+            </column>
+        </property>
+        <property name="tipFechaActualizacion" type="date">
+            <column name="TIP_FECHA_ACTUALIZACION" length="7">
+                <comment>Campo de auditor&#237;a b&#225;sica</comment>
+            </column>
+        </property>
+        <set name="sgpDocumentosAutorizacions" inverse="true">
+            <key>
+                <column name="TIPPRO_ID" precision="3" scale="0" not-null="true">
+                    <comment>Tipo de proceso por ejemplo: Convalidaci&#243;n, recuperaci&#243;n, etc, proveniente de la tabla sgp_tipos_procesos</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpDocumentosAutorizacion" />
+        </set>
+    </class>
+</hibernate-mapping>

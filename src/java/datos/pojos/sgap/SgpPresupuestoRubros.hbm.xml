@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpPresupuestoRubros" table="SGP_PRESUPUESTO_RUBROS" schema="POSTGRADO">
+        <comment>Guarda la informaci&#195;&#179;n de los rubros que se configuran para un presupuesto</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpPresupuestoRubrosId">
+            <key-property name="id" type="int">
+                <column name="ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="precabId" type="int">
+                <column name="PRECAB_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpPresupuestoCabeceras" class="datos.pojos.sgap.SgpPresupuestoCabeceras" update="false" insert="false" fetch="select">
+            <column name="PRECAB_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo del presupuesto cabecera</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpPresupuestoRubros" class="datos.pojos.sgap.SgpPresupuestoRubros" update="false" insert="false" fetch="select">
+            <column name="PADRE_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo del rubro padre</comment>
+            </column>
+            <column name="PRECAB_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo del presupuesto cabecera</comment>
+            </column>
+        </many-to-one>
+        <property name="numero" type="string">
+            <column name="NUMERO" length="20" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" not-null="true">
+                <comment>Nombre del rubro</comment>
+            </column>
+        </property>
+        <property name="estitulo" type="char">
+            <column name="ESTITULO" length="1" not-null="true">
+                <comment>Determina si no es rubro sino un t&#195;&#173;tulo</comment>
+            </column>
+        </property>
+        <property name="tipoRubro" type="string">
+            <column name="TIPO_RUBRO" length="3" not-null="true">
+                <comment>Tipo de rubro de ingreso 'ING' o egreso 'EGR'</comment>
+            </column>
+        </property>
+        <property name="orden" type="short">
+            <column name="ORDEN" precision="4" scale="0" not-null="true">
+                <comment>Orden en el que aparecen los rubros</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="atualizado" type="string">
+            <column name="ATUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpPresupuestoRubroses" inverse="true">
+            <key>
+                <column name="PADRE_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo del rubro padre</comment>
+                </column>
+                <column name="PRECAB_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo del presupuesto cabecera</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpPresupuestoRubros" />
+        </set>
+        <set name="sgpPresupuestoValoreses" inverse="true">
+            <key>
+                <column name="PRERUB_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo de los rubros del presupuesto</comment>
+                </column>
+                <column name="PRECAB_ID" precision="5" scale="0" not-null="true">
+                    <comment>c&#195;&#147;DIGO DE LA CABECERA DE LOS RUBROS</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpPresupuestoValores" />
+        </set>
+    </class>
+</hibernate-mapping>

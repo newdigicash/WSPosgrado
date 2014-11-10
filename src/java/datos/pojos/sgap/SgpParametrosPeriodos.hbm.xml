@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpParametrosPeriodos" table="SGP_PARAMETROS__PERIODOS" schema="POSTGRADO">
+        <comment>Configuraciones de par&#195;&#161;metros a nivel de periodo lectivo</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpParametrosPeriodosId">
+            <key-property name="perlecId" type="int">
+                <column name="PERLEC_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="parametroId" type="int">
+                <column name="PARAMETRO_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpParametros" class="datos.pojos.sgap.SgpParametros" update="false" insert="false" fetch="select">
+            <column name="PARAMETRO_ID" precision="5" scale="0" not-null="true">
+                <comment>ID del parametro para el periodo</comment>
+            </column>
+        </many-to-one>
+        <property name="fechaInicio" type="date">
+            <column name="FECHA_INICIO" length="7">
+                <comment>Fecha inicial del parametro</comment>
+            </column>
+        </property>
+        <property name="fechaFinal" type="date">
+            <column name="FECHA_FINAL" length="7">
+                <comment>Fecha final del par&#195;&#161;metro</comment>
+            </column>
+        </property>
+        <property name="valor1" type="string">
+            <column name="VALOR1" length="20">
+                <comment>Posible valor para el parametro</comment>
+            </column>
+        </property>
+        <property name="valor2" type="string">
+            <column name="VALOR2" length="20">
+                <comment>Posible valor para el parametro</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si el registro est&#195;&#161; activo</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>fecha de creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizacion del registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

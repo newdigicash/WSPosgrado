@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpEquivalencias" table="SGP_EQUIVALENCIAS" schema="POSTGRADO">
+        <comment>Equivalencias que puede tener un estudiante Sobresaliente, Muy Buena, Buena, Regular, Insuficiente</comment>
+        <id name="id" type="short">
+            <column name="ID" precision="3" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="20" not-null="true">
+                <comment>Nombre de la equivalencia</comment>
+            </column>
+        </property>
+        <property name="abreviatura" type="string">
+            <column name="ABREVIATURA" length="2" not-null="true">
+                <comment>Abreviatura de la equivalencia</comment>
+            </column>
+        </property>
+        <property name="notaInicial" type="big_decimal">
+            <column name="NOTA_INICIAL" precision="7" not-null="true">
+                <comment>Nota de inicio del rango de equivalencia</comment>
+            </column>
+        </property>
+        <property name="notaFinal" type="big_decimal">
+            <column name="NOTA_FINAL" precision="7" not-null="true">
+                <comment>Nota final del rango de la equivalencia</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a para saber si la tupla est&#195;&#161; activa</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a para saber quien creo la tupla</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a para saber cuando fue creada la tupla</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Campo de auditor&#195;&#173;a para saber quien acutuliz&#195;&#179; la tupla</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Campo de auditor&#195;&#173;a para saber cuando actuliz&#195;&#179; la tupla</comment>
+            </column>
+        </property>
+        <set name="sgpMatriculasAsignaturases" inverse="true">
+            <key>
+                <column name="EQUIVALENCIA_ID" precision="2" scale="0">
+                    <comment>Equivalencia de la nota de la nota con la que aprueba el estudiante la asignatura. Tomada de la tabla equivalencias</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpMatriculasAsignaturas" />
+        </set>
+    </class>
+</hibernate-mapping>

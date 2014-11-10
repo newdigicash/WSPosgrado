@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpFormasAprobacion" table="SGP_FORMAS_APROBACION" schema="POSTGRADO">
+        <comment>Nos indica las formas de aprobaci&#195;&#179;n que se pueden tener. Escolaridad, examen de ubicaci&#195;&#179;n, convalidaci&#195;&#179;n, global</comment>
+        <id name="id" type="short">
+            <column name="ID" precision="3" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="60" not-null="true" unique="true">
+                <comment>Nombre de la forma de aprobacion</comment>
+            </column>
+        </property>
+        <property name="abreviatura" type="string">
+            <column name="ABREVIATURA" length="6" not-null="true" unique="true">
+                <comment>abreviatura de las forma de aprobaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="200" />
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a para saber si est&#195;&#161; o no activo la forma de aprobaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a para saber qui&#195;&#169;n creo la tupla</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>Campo de auditor&#195;&#173;a para saber cuando se creo la tupla</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Campo de auditor&#195;&#173;a para saber qui&#195;&#169;n actualiz&#195;&#179; la tupla</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Campo de auditor&#195;&#173;a para saber cuando se actualiz&#195;&#179; la tupla</comment>
+            </column>
+        </property>
+        <set name="sgpMatriculasAsignaturases" inverse="true">
+            <key>
+                <column name="FORAPR_ID" precision="2" scale="0" not-null="true">
+                    <comment>Id de la forma de aprobaci&#195;&#179;n de la asignatura. Tomada de la tabla formas de aprobaci&#195;&#179;n</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpMatriculasAsignaturas" />
+        </set>
+    </class>
+</hibernate-mapping>

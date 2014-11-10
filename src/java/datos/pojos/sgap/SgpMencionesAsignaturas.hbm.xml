@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpMencionesAsignaturas" table="SGP_MENCIONES_ASIGNATURAS" schema="POSTGRADO">
+        <comment>Tabla que guarda las asignaturas que pertenecen a las menciones</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpMencionesAsignaturasId">
+            <key-property name="mencionId" type="int">
+                <column name="MENCION_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="mallaId" type="int">
+                <column name="MALLA_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="placurId" type="int">
+                <column name="PLACUR_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="asignaturaId" type="int">
+                <column name="ASIGNATURA_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpMenciones" class="datos.pojos.sgap.SgpMenciones" update="false" insert="false" fetch="select">
+            <column name="MENCION_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo de la menci&#195;&#179;n</comment>
+            </column>
+            <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la malla</comment>
+            </column>
+            <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo del plan de curso</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado</comment>
+            </column>
+        </many-to-one>
+            <many-to-one name="sgpUnidadesOrganizacion" class="datos.pojos.sgap.SgpUnidadesOrganizacion" fetch="select">
+            <column name="UNIORG_ID" precision="5" scale="0" not-null="true">
+                <comment>Unidad de organizaci&#243;n curricular en la que est&#225; agrupada la asignatura.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpAsignaturasMallas" class="datos.pojos.sgap.SgpAsignaturasMallas" update="false" insert="false" fetch="select">
+            <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la malla</comment>
+            </column>
+            <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo del plan de curso</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado</comment>
+            </column>
+            <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo de l a asignatura</comment>
+            </column>
+        </many-to-one>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+         <property name="esobligatoria" type="string">
+            <column name="ESOBLIGATORIA" length="1" not-null="true">
+                <comment>Indica la obligatoriedad de cursar por parte del estudiante.</comment>
+            </column>
+        </property>
+        <property name="eselectiva" type="string">
+            <column name="ESELECTIVA" length="1" not-null="true">
+                <comment>Si la asignatura es electiva</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

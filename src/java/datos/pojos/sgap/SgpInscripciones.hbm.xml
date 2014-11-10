@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpInscripciones" table="SGP_INSCRIPCIONES" schema="POSTGRADO">
+        <comment>Registro de inscripciones en cursos de postgrado</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpInscripcionesId">
+            <key-property name="personaId" type="string">
+                <column name="PERSONA_ID" length="15" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="edicionId" type="int">
+                <column name="EDICION_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="perlecId" type="int">
+                <column name="PERLEC_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <property name="fechaRegistro" type="timestamp">
+            <column name="FECHA_REGISTRO" length="20">
+                <comment>Fecha en la que se registra la inscripci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="estado" type="char">
+            <column name="ESTADO" length="1" not-null="true">
+                <comment>G: grabado P: Preinscrito I:inscrito o H:habilitado</comment>
+            </column>
+        </property>
+        <property name="fechaConfirmacion" type="timestamp">
+            <column name="FECHA_CONFIRMACION" length="20">
+                <comment>Fecha de confirmaci&#195;&#179;n de la inscripci&#195;&#179;n (cuando se registra el pago del aspirante)</comment>
+            </column>
+        </property>
+        <property name="docpagId" type="string">
+            <column name="DOCPAG_ID" length="50">
+                <comment>Id del documento con el que se pag&#195;&#179; esta asignatura</comment>
+            </column>
+        </property>
+        <property name="fechaPago" type="date">
+            <column name="FECHA_PAGO" length="7">
+                <comment>Fecha de pago de la inscripci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="estaAnulada" type="char">
+            <column name="ESTA_ANULADA" length="1" not-null="true">
+                <comment>Indica si la inscripci&#195;&#179;n est&#195;&#161; anulada</comment>
+            </column>
+        </property>
+        <property name="fechaAnulacion" type="date">
+            <column name="FECHA_ANULACION" length="7">
+                <comment>FEcha de anulaci&#195;&#179;n de la inscripci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="formaPago" type="string">
+            <column name="FORMA_PAGO" length="3" />
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="estaMatriculado" type="char">
+            <column name="ESTA_MATRICULADO" length="1" not-null="true">
+                <comment>Detrmina si el aspirante se matricul&#195;&#179; en el curso de postgrado</comment>
+            </column>
+        </property>
+        <property name="costo" type="big_decimal">
+            <column name="COSTO" precision="8">
+                <comment>Costo de la inscripci&#243;n para el aspirante.</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

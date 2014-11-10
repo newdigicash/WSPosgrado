@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpComponentesPlanes" table="SGP_COMPONENTES_PLANES" schema="POSTGRADO">
+        <comment>Guarda el contenido de los componenetes de un plan curricular</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpComponentesPlanesId">
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="placurId" type="int">
+                <column name="PLACUR_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="cabcomId" type="int">
+                <column name="CABCOM_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="componenteId" type="int">
+                <column name="COMPONENTE_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpComponentesDetalles" class="datos.pojos.sgap.SgpComponentesDetalles" update="false" insert="false" fetch="select">
+            <column name="CABCOM_ID" precision="5" scale="0" not-null="true">
+                <comment>Cabecera de la configuraci&#195;&#179;n de los componentes</comment>
+            </column>
+            <column name="COMPONENTE_ID" precision="5" scale="0" not-null="true">
+                <comment>Componetne en el qie se registra el valor de acuerdo al plan de carrera</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpPlanesCurso" class="datos.pojos.sgap.SgpPlanesCurso" update="false" insert="false" fetch="select">
+            <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del plan de carrera</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del curso de postgrado</comment>
+            </column>
+        </many-to-one>
+        <property name="valor" type="string">
+            <column name="VALOR" />
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="timestamp">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

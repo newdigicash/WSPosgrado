@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpSubareas" table="SGP_SUBAREAS" schema="POSTGRADO">
+        <comment>Almacena las sub-areas de conocimiento seg&#195;&#186;n la UNESCO</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sgpAreasConocimiento" class="datos.pojos.sgap.SgpAreasConocimiento" fetch="select">
+            <column name="AREA_ID" precision="5" scale="0" not-null="true">
+                <comment>Area de conocimiento a la que est&#195;&#161; relacionada</comment>
+            </column>
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="80" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="400" not-null="true">
+                <comment>Ayuda descriptiva de la sub-area de conocimeinto</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpCursosPostgrados" inverse="true">
+            <key>
+                <column name="SUBARE_ID" precision="5" scale="0" not-null="true">
+                    <comment>Sub &#195;&#161;rea de conocimiento del curso de postgrado</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpCursosPostgrado" />
+        </set>
+    </class>
+</hibernate-mapping>

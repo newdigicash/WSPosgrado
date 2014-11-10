@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpTrabajosTitulacion" table="SGP_TRABAJOS_TITULACION" schema="POSTGRADO">
+        <comment>Trabajos de titulaci&#195;&#179;n propuestos</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpTrabajosTitulacionId">
+            <key-property name="id" type="int">
+                <column name="ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <property name="titulo" type="string">
+            <column name="TITULO" length="200" not-null="true">
+                <comment>T&#195;&#173;tulo del trabajo de titulaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="500" not-null="true">
+                <comment>Breve descripci&#195;&#179;n del trabajo de titulaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="notaDocumento" type="big_decimal">
+            <column name="NOTA_DOCUMENTO" precision="7" scale="4">
+                <comment>Nota del documento impreso</comment>
+            </column>
+        </property>
+        <property name="notaSustentacion" type="big_decimal">
+            <column name="NOTA_SUSTENTACION" precision="7" scale="4">
+                <comment>Nota de la sustentaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="estadoAprobacion" type="string">
+            <column name="ESTADO_APROBACION" length="3">
+                <comment>Estado de aprobaci&#195;&#179;n APR: Aprobado o REP: Reprobado</comment>
+            </column>
+        </property>
+        <property name="porcentajeAvance" type="java.lang.Short">
+            <column name="PORCENTAJE_AVANCE" precision="3" scale="0">
+                <comment>Porcentaje de avance general</comment>
+            </column>
+        </property>
+        <property name="disenoAprobado" type="char">
+            <column name="DISENO_APROBADO" length="1" not-null="true">
+                <comment>Determina si el dise&#195;&#177;o fue aprobado</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpTrabajoPersonases" inverse="true">
+            <key>
+                <column name="TRATIT_ID" precision="5" scale="0" not-null="true" />
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpTrabajoPersonas" />
+        </set>
+        <set name="sgpActividadesTitulacions" inverse="true">
+            <key>
+                <column name="TRATIT_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del trabajo de titulaci&#195;&#179;n al que pertenece la actividad de titulaci&#195;&#179;n</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado en el que se realiza el trabajo de titulaci&#195;&#179;n</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpActividadesTitulacion" />
+        </set>
+    </class>
+</hibernate-mapping>

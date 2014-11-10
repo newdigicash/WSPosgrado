@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpSilabos" table="SGP_SILABOS" schema="POSTGRADO">
+        <comment>Esta tabla contiene la informaci&#195;&#179;n de los s&#195;&#173;labos de cada asignatura por periodo lectivo</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpSilabosId">
+            <key-property name="asignaturaId" type="int">
+                <column name="ASIGNATURA_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="edicionId" type="int">
+                <column name="EDICION_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpDocumentosBinarios" class="datos.pojos.sgap.SgpDocumentosBinarios" fetch="select">
+            <column name="SILABO_PDF" precision="5" scale="0">
+                <comment>Documento del s&#195;&#173;labo en formato pdf</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpEdiciones" class="datos.pojos.sgap.SgpEdiciones" update="false" insert="false" fetch="select">
+            <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>N&#195;&#186;mero de edici&#195;&#179;n del postgrado donde se registra el s&#195;&#173;labo</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado al que pertenece la asignatura que se le asigna el s&#195;&#173;albo</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpAsignaturasMallas" class="datos.pojos.sgap.SgpAsignaturasMallas" update="false" insert="false" fetch="select">
+            <column name="MALLA_ID" precision="5" scale="0" not-null="true">
+                <comment>Malla que contiene la asignatura que se va a definir el s&#195;&#173;labo</comment>
+            </column>
+            <column name="PLACUR_ID" precision="5" scale="0" not-null="true">
+                <comment>Plan de curso al que pertenece la asignatura y al que se le definir&#195;&#161; un s&#195;&#173;labo</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado al que pertenece la asignatura que se le asigna el s&#195;&#173;albo</comment>
+            </column>
+            <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la asignatura que se va a guardar el s&#195;&#173;labo</comment>
+            </column>
+        </many-to-one>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="timestamp">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpSilaboComponenteses" inverse="true">
+            <key>
+                <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Asignatura que se le va a agregar un componente del s&#195;&#173;labo</comment>
+                </column>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>Malla que contiene la asignatura que se va a definir el s&#195;&#173;labo</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado al que se le genera el s&#195;&#173;labo</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpSilaboComponentes" />
+        </set>
+    </class>
+</hibernate-mapping>

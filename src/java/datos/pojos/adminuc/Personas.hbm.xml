@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/12/2011 05:07:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.Personas" table="PERSONAS" schema="ADMINUC">
+        <comment>Personas</comment>
+        <id name="id" type="string">
+            <column name="ID" length="15" />
+            <generator class="assigned" />
+        </id>
+        <property name="documentoId" type="string">
+            <column name="DOCUMENTO_ID" length="20" not-null="true">
+                <comment>Documento de Identificaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="tipdocId" type="string">
+            <column name="TIPDOC_ID" length="3" not-null="true">
+                <comment>ID de Tipo de documento de identificaci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="ubicacId" type="int">
+            <column name="UBICAC_ID" precision="5" scale="0" not-null="true">
+                <comment>ID Ubicacion de residencia</comment>
+            </column>
+        </property>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" length="100" not-null="true">
+                <comment>Direcci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="numeroDireccion" type="string">
+            <column name="NUMERO_DIRECCION" length="10" not-null="true">
+                <comment>N&#195;&#186;mero de direcci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="50">
+                <comment>Correo electr&#195;&#179;nico</comment>
+            </column>
+        </property>
+        <property name="personeria" type="string">
+            <column name="PERSONERIA" length="1" not-null="true">
+                <comment>Personer&#195;&#173;a</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Est&#195;&#161; activo</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creacion del registro</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Usuario de actualizacion de registro</comment>
+            </column>
+        </property>        
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizacion de registro</comment>
+            </column>
+        </property>
+        <property name="identificacion" type="string">
+            <column name="IDENTIFICACION" length="15">
+                <comment>Numero de Identificacion de la persona</comment>
+            </column>
+        </property> 
+        <set name="personasNaturaleses" inverse="true">
+            <key>
+                <column name="PERSON_ID" length="15" not-null="true" unique="true">
+                    <comment>ID de Persona</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.adminuc.PersonasNaturales" />
+        </set>
+         
+         <bag lazy="false" name="telefonosPersonas" inverse="true">
+            <key>
+                <column name="PERSON_ID" length="15" not-null="true">
+                    <comment>ID DE LA PERSONA</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.adminuc.TelefonosPersonas" />
+        </bag>       
+    </class>
+</hibernate-mapping>

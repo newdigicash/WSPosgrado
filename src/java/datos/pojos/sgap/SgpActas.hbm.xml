@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/02/2014 04:34:13 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpActas" table="SGP_ACTAS" schema="POSTGRADO">
+        <composite-id name="id" class="datos.pojos.sgap.SgpActasId">
+            <key-property name="actId" type="int">
+                <column name="ACT_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="actCurposId" type="int">
+                <column name="ACT_CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="actEdicionId" type="int">
+                <column name="ACT_EDICION_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpEdiciones" class="datos.pojos.sgap.SgpEdiciones" update="false" insert="false" fetch="select">
+            <column name="ACT_EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la edici&#243;n de posgrado</comment>
+            </column>
+            <column name="ACT_CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del programa de posgrado</comment>
+            </column>
+        </many-to-one>
+        <property name="actNombre" type="string">
+            <column name="ACT_NOMBRE" length="400" not-null="true">
+                <comment>Nombre configuraci&#243;n actas</comment>
+            </column>
+        </property>
+        <property name="actCalculoNotafinal" type="string">
+            <column name="ACT_CALCULO_NOTAFINAL" length="20" not-null="true">
+                <comment>Determina si el c&#225;lculo de todos los par&#225;metros de la acta de grado es Suma: suma o Promedio: promedio</comment>
+            </column>
+        </property>
+        <property name="actRedondea" type="char">
+            <column name="ACT_REDONDEA" length="1" not-null="true">
+                <comment>Indica si se redondea o se trunca de la nota final del acta de grado S: redondea, N: trunca</comment>
+            </column>
+        </property>
+        <property name="actNumeroDecimales" type="byte">
+            <column name="ACT_NUMERO_DECIMALES" precision="2" scale="0" not-null="true">
+                <comment>N&#250;mero de decimales que permite la nota final del acta de grado</comment>
+            </column>
+        </property>
+        <property name="actEnvigencia" type="char">
+            <column name="ACT_ENVIGENCIA" length="1" not-null="true">
+                <comment>Si el acta esta en vigencia</comment>
+            </column>
+        </property>
+        <property name="actFechaVigencia" type="date">
+            <column name="ACT_FECHA_VIGENCIA" length="7">
+                <comment>Fecha en la que inicia la vigencia del acta</comment>
+            </column>
+        </property>
+        <property name="actEstaactivo" type="char">
+            <column name="ACT_ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si esta activo</comment>
+            </column>
+        </property>
+        <property name="actCreado" type="string">
+            <column name="ACT_CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="actFechaCreacion" type="date">
+            <column name="ACT_FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="actActualizado" type="string">
+            <column name="ACT_ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="actFechaActualizacion" type="date">
+            <column name="ACT_FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <set name="sgpActasConfiguracioneses" inverse="true">
+            <key>
+                <column name="ACC_ACTA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la cabecera de configuraci&#243;n de actas</comment>
+                </column>
+                <column name="ACC_CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del programa de posgrado</comment>
+                </column>
+                <column name="ACC_EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la edici&#243;n de posgrado</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpActasConfiguraciones" />
+        </set>
+        <set name="sgpActaEstudiantes" inverse="true">
+            <key>
+                <column name="ACE_ACTA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la configuraci&#243;n de acta que se utiliz&#243; para c&#225;lculos</comment>
+                </column>
+                <column name="ACE_CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del posgrado</comment>
+                </column>
+                <column name="ACE_EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la edici&#243;n</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpActaEstudiante" />
+        </set>
+    </class>
+</hibernate-mapping>

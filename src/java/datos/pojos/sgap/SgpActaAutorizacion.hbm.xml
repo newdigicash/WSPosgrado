@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/02/2014 04:06:18 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpActaAutorizacion" table="SGP_ACTA_AUTORIZACION" schema="POSTGRADO">
+        <composite-id name="id" class="datos.pojos.sgap.SgpActaAutorizacionId">
+            <key-property name="acaId" type="int">
+                <column name="ACA_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="acaPersonaId" type="string">
+                <column name="ACA_PERSONA_ID" length="15" />
+            </key-property>
+            <key-property name="acaCurposId" type="int">
+                <column name="ACA_CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="acaEdicionId" type="int">
+                <column name="ACA_EDICION_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpActaEstudiante" class="datos.pojos.sgap.SgpActaEstudiante" update="false" insert="false" fetch="select">
+            <column name="ACA_PERSONA_ID" length="15" not-null="true">
+                <comment>identificaci&#243;n de la persona</comment>
+            </column>
+            <column name="ACA_CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del posgrado</comment>
+            </column>
+            <column name="ACA_EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la edici&#243;n</comment>
+            </column>
+        </many-to-one>
+        <property name="acaNumeroDocumento" type="string">
+            <column name="ACA_NUMERO_DOCUMENTO" length="20" not-null="true">
+                <comment>N&#250;mero del documento</comment>
+            </column>
+        </property>
+        <property name="acaAutorizado" type="string">
+            <column name="ACA_AUTORIZADO" length="100" not-null="true">
+                <comment>Nombre del que autoriza</comment>
+            </column>
+        </property>
+        <property name="acaFechaAutorizacion" type="date">
+            <column name="ACA_FECHA_AUTORIZACION" length="7" not-null="true">
+                <comment>Fecha de autorizaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="acaObservacion" type="string">
+            <column name="ACA_OBSERVACION" length="800" not-null="true">
+                <comment>Observaciones</comment>
+            </column>
+        </property>
+        <property name="acaEstaactivo" type="char">
+            <column name="ACA_ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si esta activo</comment>
+            </column>
+        </property>
+        <property name="acaCreado" type="string">
+            <column name="ACA_CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="acaFechaCreacion" type="date">
+            <column name="ACA_FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="acaActualizado" type="string">
+            <column name="ACA_ACTUALIZADO" length="20">
+                <comment>Usuario que modifica el registro</comment>
+            </column>
+        </property>
+        <property name="acaFechaActualizacion" type="date">
+            <column name="ACA_FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de &#250;ltima modificaci&#243;n</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

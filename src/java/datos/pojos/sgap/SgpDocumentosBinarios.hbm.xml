@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpDocumentosBinarios" table="SGP_DOCUMENTOS_BINARIOS" schema="POSTGRADO">
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="documento" type="binary">
+            <column name="DOCUMENTO" not-null="true">
+                <comment>Documento binario</comment>
+            </column>
+        </property>
+        <property name="estaActivo" type="char">
+            <column name="ESTA_ACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="timestamp">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpCursosPostgrados" inverse="true">
+            <key>
+                <column name="APROBACION_CONSEJO_PDF" precision="5" scale="0" not-null="true">
+                    <comment>Id del documento guardado en formato PDF</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpCursosPostgrado" />
+        </set>
+        <set name="sgpSilaboses" inverse="true">
+            <key>
+                <column name="SILABO_PDF" precision="5" scale="0">
+                    <comment>Documento del s&#195;&#173;labo en formato pdf</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpSilabos" />
+        </set>
+        <set name="sgpResolucionesSenescyts" inverse="true">
+            <key>
+                <column name="RESOLUCION_PDF" precision="5" scale="0">
+                    <comment>Documento de resoluci&#195;&#179;n en PDF</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpResolucionesSenescyt" />
+        </set>
+        <set name="sgpEdicionesesForVistoBuenoPdf" inverse="true">
+            <key>
+                <column name="VISTO_BUENO_PDF" precision="5" scale="0" not-null="true">
+                    <comment>Visto bueno para la reedici&#195;&#179;n del curso de postgrado en formato PDF</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpEdiciones" />
+        </set>
+        <set name="sgpEdicionesesForProyectoPdf" inverse="true">
+            <key>
+                <column name="PROYECTO_PDF" precision="5" scale="0" not-null="true">
+                    <comment>Identificaci&#195;&#179;n del documento binario para el plan del proyecto del curso.</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpEdiciones" />
+        </set>
+        <set name="sgpEdicionesesForProyectoPublicoPdf" inverse="true">
+            <key>
+                <column name="PROYECTO_PUBLICO_PDF" precision="5" scale="0" not-null="true">
+                    <comment>Identificaci&#195;&#179;n del documento binario para el documento p&#195;&#186;blico del proyecto del curso.</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpEdiciones" />
+        </set>
+    </class>
+</hibernate-mapping>

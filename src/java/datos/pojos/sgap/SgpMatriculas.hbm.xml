@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/02/2014 09:01:01 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpMatriculas" table="SGP_MATRICULAS" schema="POSTGRADO">
+        <comment>Cabeceras de matr&#237;culas por estudiante, periodo lectivo, y curso de postgrado en el que se matricula</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpMatriculasId">
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="edicionId" type="int">
+                <column name="EDICION_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="personaId" type="string">
+                <column name="PERSONA_ID" length="15" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpCursosPostgrado" class="datos.pojos.sgap.SgpCursosPostgrado" update="false" insert="false" fetch="select">
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>ID del curso de postgrado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpFinanciamiento" class="datos.pojos.sgap.SgpFinanciamiento" fetch="select">
+            <column name="FINANCIAMIENTO" precision="5" scale="0" not-null="true">
+                <comment>id de la tabla financiamiento</comment>
+            </column>
+        </many-to-one>
+        <property name="perlecId" type="int">
+            <column name="PERLEC_ID" precision="5" scale="0" not-null="true">
+                <comment>ID del periodo lectivo</comment>
+            </column>
+        </property>
+        <property name="nroMatricula" type="int">
+            <column name="NRO_MATRICULA" precision="7" scale="0" not-null="true">
+                <comment>N&#250;mero de matr&#237;cula que es un n&#250;mero secuencial</comment>
+            </column>
+        </property>
+        <property name="placarId" type="java.lang.Integer">
+            <column name="PLACAR_ID" precision="5" scale="0">
+                <comment>Para razones de hist&#243;ticos se registra el plan de carrera en la que estuvo estuvo el estudiante cuando se le gener&#243; la matr&#237;cula</comment>
+            </column>
+        </property>
+        <property name="mallaId" type="java.lang.Integer">
+            <column name="MALLA_ID" precision="5" scale="0">
+                <comment>Para razones de hist&#243;ticos se registra la malla de carrera en la que estuvo el estudiante cuando se le gener&#243; la matr&#237;cula</comment>
+            </column>
+        </property>
+        <property name="esgratuita" type="char">
+            <column name="ESGRATUITA" length="1" not-null="true">
+                <comment>Indica si la matr&#237;cula fue gratuita</comment>
+            </column>
+        </property>
+        <property name="garantia" type="string">
+            <column name="GARANTIA" length="3" not-null="true">
+                <comment>La matr&#237;cula fue al contado 'CON', con garant&#237;a bancaria 'BAN' o con letra de cambio 'LET'</comment>
+            </column>
+        </property>
+        <property name="estadoMatricula" type="char">
+            <column name="ESTADO_MATRICULA" length="1" not-null="true">
+                <comment>P: Prematriculado M: matriculado</comment>
+            </column>
+        </property>
+        <property name="fechaMatricula" type="date">
+            <column name="FECHA_MATRICULA" length="7" not-null="true">
+                <comment>Fecha de matr&#237;cula</comment>
+            </column>
+        </property>
+        <property name="estaAnulada" type="char">
+            <column name="ESTA_ANULADA" length="1" not-null="true" />
+        </property>
+        <property name="fechaAnulacion" type="date">
+            <column name="FECHA_ANULACION" length="7" />
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si el registro est&#225; activo</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="beca" type="java.lang.Character">
+            <column name="BECA" length="1">
+                <comment>Indica si tiene beca C: completa; P: Parcial; N: No beca</comment>
+            </column>
+        </property>
+        <property name="porcentajeBeca" type="java.lang.Integer">
+            <column name="PORCENTAJE_BECA" precision="5" scale="0">
+                <comment>Porcentaje de la beca</comment>
+            </column>
+        </property>
+        <property name="institucionBeca" type="string">
+            <column name="INSTITUCION_BECA" length="100" />
+        </property>
+        <property name="estaRetirado" type="char">
+            <column name="ESTA_RETIRADO" length="1" not-null="true">
+                <comment>Indica si el estudiante se encuentra o no retirado.</comment>
+            </column>
+        </property>
+        <property name="otroFinanciamiento" type="string">
+            <column name="OTRO_FINANCIAMIENTO" length="100">
+                <comment>Campo para especificar otro financiamiento</comment>
+            </column>
+        </property>
+        <property name="apoyoUniversidad" type="java.lang.Character">
+            <column name="APOYO_UNIVERSIDAD" length="1">
+                <comment>Especifica si la universidad apoyar&#225; sus estudios</comment>
+            </column>
+        </property>
+        <property name="nroMatriculaCadena" type="string">
+            <column name="NRO_MATRICULA_CADENA" length="60">
+                <comment>Especifica el c&#243;digo de la matr&#237;cula: Cod. Universidad-Cod. Posgrado-Nro. Matriculado (Posgrado)-A&#241;o Mat.</comment>
+            </column>
+        </property>
+        <set name="sgpMatriculasAsignaturases" inverse="true">
+            <key>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id del curso de postgrado en el que se matricula un estudiante.</comment>
+                </column>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>Edici&#243;n del curso de postgrado</comment>
+                </column>
+                <column name="PERSONA_ID" length="15" not-null="true">
+                    <comment>Id del estudiante al que corresponde el detalle de la matr&#237;cula</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpMatriculasAsignaturas" />
+        </set>
+    </class>
+</hibernate-mapping>

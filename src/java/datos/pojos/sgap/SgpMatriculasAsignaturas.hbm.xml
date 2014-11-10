@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpMatriculasAsignaturas" table="SGP_MATRICULAS__ASIGNATURAS" schema="POSTGRADO">
+        <comment>Detalle de la matr&#195;&#173;cula de un estudiante en un curso de postgrado</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpMatriculasAsignaturasId">
+            <key-property name="id" type="byte">
+                <column name="ID" precision="2" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="edicionId" type="int">
+                <column name="EDICION_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="personaId" type="string">
+                <column name="PERSONA_ID" length="15" />
+            </key-property>
+            <key-property name="asignaturaId" type="int">
+                <column name="ASIGNATURA_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpMatriculas" class="datos.pojos.sgap.SgpMatriculas" update="false" insert="false" fetch="select">
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del curso de postgrado en el que se matricula un estudiante.</comment>
+            </column>
+            <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Edici&#195;&#179;n del curso de postgrado</comment>
+            </column>
+            <column name="PERSONA_ID" length="15" not-null="true">
+                <comment>Id del estudiante al que corresponde el detalle de la matr&#195;&#173;cula</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpTemas" class="datos.pojos.sgap.SgpTemas" update="false" insert="false" fetch="select">
+            <column name="TEMA_ID" precision="5" scale="0">
+                <comment>Id del tema que se le asigna</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del curso de postgrado en el que se matricula un estudiante.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpFormasAprobacion" class="datos.pojos.sgap.SgpFormasAprobacion" fetch="select">
+            <column name="FORAPR_ID" precision="2" scale="0" not-null="true">
+                <comment>Id de la forma de aprobaci&#195;&#179;n de la asignatura. Tomada de la tabla formas de aprobaci&#195;&#179;n</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpEquivalencias" class="datos.pojos.sgap.SgpEquivalencias" fetch="select">
+            <column name="EQUIVALENCIA_ID" precision="2" scale="0">
+                <comment>Equivalencia de la nota de la nota con la que aprueba el estudiante la asignatura. Tomada de la tabla equivalencias</comment>
+            </column>
+        </many-to-one>
+        <property name="grupo" type="int">
+            <column name="GRUPO" precision="5" scale="0" not-null="true">
+                <comment>Nro del grupo que hereda de la oferta de a asignatura</comment>
+            </column>
+        </property>
+        <property name="docpagId" type="string">
+            <column name="DOCPAG_ID" length="50">
+                <comment>Id del documento con el que se pag&#195;&#179; esta asignatura</comment>
+            </column>
+        </property>
+        <property name="curposToma" type="int">
+            <column name="CURPOS_TOMA" precision="5" scale="0" not-null="true">
+                <comment>Id del curso de postgrado al que pertenece la asignatura. El curso de postgrado donde toma la asignatura que hereda de la tabla
+                oferta_asignaturas</comment>
+            </column>
+        </property>
+        <property name="ejetemId" type="java.lang.Integer">
+            <column name="EJETEM_ID" precision="5" scale="0">
+                <comment>Id del eje tem&#195;&#161;tico al que pertenece la asignatura. Se relaciona con el eje tem&#195;&#161;tico</comment>
+            </column>
+        </property>
+        <property name="nota1" type="big_decimal">
+            <column name="NOTA1" precision="7" scale="4" />
+        </property>
+        <property name="nota2" type="big_decimal">
+            <column name="NOTA2" precision="7" scale="4" />
+        </property>
+        <property name="nota3" type="big_decimal">
+            <column name="NOTA3" precision="7" scale="4" />
+        </property>
+        <property name="nota4" type="big_decimal">
+            <column name="NOTA4" precision="7" scale="4" />
+        </property>
+        <property name="nota5" type="big_decimal">
+            <column name="NOTA5" precision="7" scale="4" />
+        </property>
+        <property name="nota6" type="big_decimal">
+            <column name="NOTA6" precision="7" scale="4" />
+        </property>
+        <property name="nota7" type="big_decimal">
+            <column name="NOTA7" precision="7" scale="4" />
+        </property>
+        <property name="nota8" type="big_decimal">
+            <column name="NOTA8" precision="7" scale="4" />
+        </property>
+        <property name="nota9" type="big_decimal">
+            <column name="NOTA9" precision="7" scale="4" />
+        </property>
+        <property name="nota10" type="big_decimal">
+            <column name="NOTA10" precision="7" scale="4" />
+        </property>
+        <property name="nota11" type="big_decimal">
+            <column name="NOTA11" precision="7" scale="4" />
+        </property>
+        <property name="nota12" type="big_decimal">
+            <column name="NOTA12" precision="7" scale="4" />
+        </property>
+        <property name="nota13" type="big_decimal">
+            <column name="NOTA13" precision="7" scale="4" />
+        </property>
+        <property name="nota14" type="big_decimal">
+            <column name="NOTA14" precision="7" scale="4" />
+        </property>
+        <property name="nota15" type="big_decimal">
+            <column name="NOTA15" precision="7" scale="4" />
+        </property>
+        <property name="notaFinal" type="big_decimal">
+            <column name="NOTA_FINAL" precision="7" scale="4">
+                <comment>Sumatoria total de las notas ingresadas</comment>
+            </column>
+        </property>
+        <property name="sesionesFaltas" type="java.lang.Integer">
+            <column name="SESIONES_FALTAS" precision="5" scale="0">
+                <comment>N&#195;&#186;mero de faltas del estudiante</comment>
+            </column>
+        </property>
+        <property name="vecesCursa" type="java.lang.Boolean">
+            <column name="VECES_CURSA" precision="1" scale="0">
+                <comment>N&#195;&#186;mero de veces que cursa la asignatura</comment>
+            </column>
+        </property>
+        <property name="esgratuita" type="char">
+            <column name="ESGRATUITA" length="1" not-null="true">
+                <comment>Determina si la materia fue o no pagada</comment>
+            </column>
+        </property>
+        <property name="estadoAprobacion" type="string">
+            <column name="ESTADO_APROBACION" length="2">
+                <comment>AP: Aprobado, SU: Suspenso, RE: Reprobado, RF: Reprobado por faltas, RS: Reprobado Sanci&#195;&#179;n, SS: Suspenso Sanci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="estadoMatricula" type="char">
+            <column name="ESTADO_MATRICULA" length="1" not-null="true">
+                <comment>Estado de la matricula del estudiante P: Prematriculado, M: Matriculado.</comment>
+            </column>
+        </property>
+        <property name="fechaMatricula" type="date">
+            <column name="FECHA_MATRICULA" length="7">
+                <comment>Fecha en la que se habilita la mtr&#195;&#173;cula osea llega al estado matriculado</comment>
+            </column>
+        </property>
+        <property name="estaAnulada" type="char">
+            <column name="ESTA_ANULADA" length="1" not-null="true">
+                <comment>Determina si la matr&#195;&#173;cula en una asignatura ha sido anulada</comment>
+            </column>
+        </property>
+        <property name="fechaAnulacion" type="date">
+            <column name="FECHA_ANULACION" length="7">
+                <comment>Fecha de anulac&#195;&#179;n en el caso de estar anulada la matr&#195;&#173;cula en la asignatura</comment>
+            </column>
+        </property>
+        <property name="observacion" type="string">
+            <column name="OBSERVACION" length="500">
+                <comment>Observaciones de la matr&#195;&#173;cula en el caso de existir alguna</comment>
+            </column>
+        </property>
+        <property name="totalHoras" type="string">
+            <column name="TOTAL_HORAS" length="5">
+                <comment>Total de las horas que tiene la asignaturas matricular</comment>
+            </column>
+        </property>
+        <property name="totalCreditos" type="java.lang.Short">
+            <column name="TOTAL_CREDITOS" precision="3" scale="0">
+                <comment>Total de cr&#195;&#169;ditos que tiene la asignaturas matricular</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si el registro est&#195;&#161; activo</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizacion del registro</comment>
+            </column>
+        </property>
+        <property name="nivel" type="java.lang.Integer">
+            <column name="NIVEL" precision="2" scale="0">
+                <comment>N&#250;mero del nivel al que pertence la asignatura, es utilizada para soportar la matr&#237;cula por a&#241;os. Utilizado para las Especialidades
+                M&#233;dicas e indica el a&#241;o en el que est&#225; registrada la asignatura.</comment>
+            </column>
+        </property>
+        <set name="sgpDocumentosAutorizacions" inverse="true">
+            <key>
+                <column name="MATASIG_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la tabla matr&#195;&#173;culas asignaturas</comment>
+                </column>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Curso de postgrado</comment>
+                </column>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>Edici&#195;&#179;n del curso de postgrado</comment>
+                </column>
+                <column name="PERSONA_ID" length="15" not-null="true">
+                    <comment>Persona a la que se le aplica el docuemtno de autorizaci&#195;&#179;n</comment>
+                </column>
+                <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo de la asignatura que se le aplica el documento de autorizaci&#195;&#179;n</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpDocumentosAutorizacion" />
+        </set>
+    </class>
+</hibernate-mapping>

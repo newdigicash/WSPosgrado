@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/12/2011 05:07:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.Usuarios" table="USUARIOS" schema="ADMINUC">
+        <id name="personId" type="string">
+            <column name="PERSON_ID" length="15" />
+            <generator class="assigned" />
+        </id>
+        <property name="login" type="string">
+            <column name="LOGIN" length="15" not-null="true" />
+        </property>
+        <property name="nombreCorto" type="string">
+            <column name="NOMBRE_CORTO" length="15" not-null="true" />
+        </property>
+        <property name="contrasenia" type="string">
+            <column name="CONTRASENIA" length="45" not-null="true" />
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="rolesUsuarioses" inverse="true">
+            <key>
+                <column name="USUARI_PERSONID" length="15" not-null="true">
+                    <comment>ID de Usuario</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.adminuc.RolesUsuarios" />
+        </set>
+    </class>
+</hibernate-mapping>

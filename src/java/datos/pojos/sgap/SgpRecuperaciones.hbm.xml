@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/12/2013 04:31:40 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpRecuperaciones" table="SGP_RECUPERACIONES" schema="POSTGRADO">
+        <id name="recId" type="int">
+            <column name="REC_ID" precision="6" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sgpMatriculasAsignaturas" class="datos.pojos.sgap.SgpMatriculasAsignaturas" fetch="select">
+            <column name="REC_MATASIG_ID" precision="2" scale="0" not-null="true">
+                <comment>Id de la tabla matricula asignatura</comment>
+            </column>
+            <column name="REC_CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del programa de posgrado</comment>
+            </column>
+            <column name="REC_EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la edici&#243;n de posgrado</comment>
+            </column>
+            <column name="REC_PERSONA_ID" length="15" not-null="true">
+                <comment>N&#250;mero de identificaci&#243;n del estudiante</comment>
+            </column>
+            <column name="REC_ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                <comment>Asignatura que se est&#225; recuperando</comment>
+            </column>
+        </many-to-one>
+        <property name="recRecupMismoPost" type="string">
+            <column name="REC_RECUP_MISMO_POST" length="1">
+                <comment>Indica si se recupera con otra asignatura del mismo postgrado</comment>
+            </column>
+        </property>
+        <property name="recDentroUniversidad" type="string">
+            <column name="REC_DENTRO_UNIVERSIDAD" length="1">
+                <comment>Indica si se recupera dentro de la universidad</comment>
+            </column>
+        </property>
+        <property name="recUniversidadRecId" type="java.lang.Integer">
+            <column name="REC_UNIVERSIDAD_REC_ID" precision="5" scale="0">
+                <comment>Id de universidad en caso de que se recupere en otra U</comment>
+            </column>
+        </property>
+        <property name="recCurposRecId" type="java.lang.Integer">
+            <column name="REC_CURPOS_REC_ID" precision="5" scale="0">
+                <comment>Id del posgrado de recuperaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="recEdicionRecId" type="java.lang.Integer">
+            <column name="REC_EDICION_REC_ID" precision="5" scale="0">
+                <comment>Id de la edici&#243;n de recuperaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="recAsignaturaRecId" type="java.lang.Integer">
+            <column name="REC_ASIGNATURA_REC_ID" precision="5" scale="0">
+                <comment>Id de la asignatura de recuperaci&#243;</comment>
+            </column>
+        </property>
+        <property name="recUniversidadNombre" type="string">
+            <column name="REC_UNIVERSIDAD_NOMBRE" length="200">
+                <comment>Nombre de la Universidad en la que se recupera</comment>
+            </column>
+        </property>
+        <property name="recPostgradoNombre" type="string">
+            <column name="REC_POSTGRADO_NOMBRE" length="200">
+                <comment>Nombre del posgrado en el que se recupera</comment>
+            </column>
+        </property>
+        <property name="recEdicionNombre" type="string">
+            <column name="REC_EDICION_NOMBRE" length="60">
+                <comment>Nombre de la edici&#243;n en la que se recupera</comment>
+            </column>
+        </property>
+        <property name="recAsignaturaNombre" type="string">
+            <column name="REC_ASIGNATURA_NOMBRE" length="100">
+                <comment>Nombre de la asignatura de recuperaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="recAsigCreditos" type="java.lang.Short">
+            <column name="REC_ASIG_CREDITOS" precision="3" scale="0">
+                <comment>Cr&#233;ditos de la asignatura de recuperaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="recNotaFinal" type="big_decimal">
+            <column name="REC_NOTA_FINAL" precision="7" scale="4">
+                <comment>Nota Final de recuperaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="recEstadoAprobacionAnt" type="string">
+            <column name="REC_ESTADO_APROBACION_ANT" length="2">
+                <comment>Estado Anterior de Aprobaci&#243;n de la Asignatura que se esta recuperando</comment>
+            </column>
+        </property>
+        <property name="recDocAutorizacion" type="string">
+            <column name="REC_DOC_AUTORIZACION" length="30">
+                <comment>N&#250;mero del doc. de autorizaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="recFechaAutorizacion" type="date">
+            <column name="REC_FECHA_AUTORIZACION" length="7">
+                <comment>Fecha de autorizaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="recAutorizadoPor" type="string">
+            <column name="REC_AUTORIZADO_POR" length="60">
+                <comment>Quien autoriza la recuperaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="recObservaciones" type="string">
+            <column name="REC_OBSERVACIONES" length="200">
+                <comment>Observaciones</comment>
+            </column>
+        </property>
+        <property name="recEstaactivo" type="string">
+            <column name="REC_ESTAACTIVO" length="1" not-null="true">
+                <comment>Borrado l&#243;gico</comment>
+            </column>
+        </property>
+        <property name="recCreado" type="string">
+            <column name="REC_CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="recFechaCreacion" type="date">
+            <column name="REC_FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="recActualizado" type="string">
+            <column name="REC_ACTUALIZADO" length="20">
+                <comment>Usuario que modifica el registro</comment>
+            </column>
+        </property>
+        <property name="recFechaActualizacion" type="date">
+            <column name="REC_FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de &#250;ltima modificaci&#243;n</comment>
+            </column>
+        </property>
+        <set name="sgpMatriculasAsignaturases" inverse="true">
+            <key>
+                <column name="RECUPERACION_ID" precision="6" scale="0">
+                    <comment>En caso de que se requiera una recuperaci&#243;n, este campo almacena el Id</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpMatriculasAsignaturas" />
+        </set>
+    </class>
+</hibernate-mapping>

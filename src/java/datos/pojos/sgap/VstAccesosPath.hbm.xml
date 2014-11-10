@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.VstAccesosPath" table="VST_ACCESOS_PATH" schema="POSTGRADO">
+        <comment></comment>
+        <composite-id name="id" class="datos.pojos.sgap.VstAccesosPathId">
+            <key-property name="personaId" type="string">
+                <column name="PERSONA_ID" length="15"/>
+            </key-property>
+            <key-property name="dependenciaId" type="int">
+                <column name="DEPENDENCIA_ID" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0"/>                
+            </key-property>
+        </composite-id>       
+        
+        <property name="dependencia" type="string">
+            <column name="DEPENDENCIA" length="100" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        
+        <property name="curso" type="string">
+            <column name="CURSO" length="200" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="unidadAcademicaId" type="string">
+            <column name="UNIDAD_ACADEMICA_ID" length="4000" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="unidadAcademica" type="string">
+            <column name="UNIDAD_ACADEMICA" length="4000" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="path" type="string">
+            <column name="PATH" length="4000" not-null="true" />
+        </property>        
+    </class>
+</hibernate-mapping>

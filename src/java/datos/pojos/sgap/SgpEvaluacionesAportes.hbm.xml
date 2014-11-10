@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpEvaluacionesAportes" table="SGP_EVALUACIONES__APORTES" schema="POSTGRADO">
+        <comment>Esta tabla contiene la configuraci&#195;&#179;n de los difentes aportes como es el nombre del aporte, el m&#195;&#173;nimo y m&#195;&#161;ximo que se permite
+        digitar y la regla de c&#195;&#161;lculo.</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpEvaluacionesAportesId">
+            <key-property name="forevaId" type="int">
+                <column name="FOREVA_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="posColumnaNota" type="byte">
+                <column name="POS_COLUMNA_NOTA" precision="2" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpFormasEvaluacion" class="datos.pojos.sgap.SgpFormasEvaluacion" update="false" insert="false" fetch="select">
+            <column name="FOREVA_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la forma de evaluaci&#195;&#179;n</comment>
+            </column>
+        </many-to-one>
+        <property name="columnaNota" type="string">
+            <column name="COLUMNA_NOTA" length="20" not-null="true">
+                <comment>Es el nombre del campo en la tabla sga_matriculas__asignaturas, es decir NOTA1, NOTA2, ....NOTA_15 se incluye el campo NOTA_FINAL.</comment>
+            </column>
+        </property>
+        <property name="nombreAporte" type="string">
+            <column name="NOMBRE_APORTE" length="25" not-null="true">
+                <comment>Es el nombre del aporte que se va a mostrar en el registro de notas.</comment>
+            </column>
+        </property>
+        <property name="abreviatura" type="string">
+            <column name="ABREVIATURA" length="10" not-null="true">
+                <comment>Es el nombre del aporte abreviado que se va a mostrar en el registro de notas</comment>
+            </column>
+        </property>
+        <property name="nroDecimales" type="byte">
+            <column name="NRO_DECIMALES" precision="1" scale="0" not-null="true">
+                <comment>N&#195;&#186;mero de decimales que soporta el aporte</comment>
+            </column>
+        </property>
+        <property name="valorminimo" type="big_decimal">
+            <column name="VALORMINIMO" precision="7" scale="4" not-null="true">
+                <comment>Valor m&#195;&#173;nimo que tendr&#195;&#161; el aporte</comment>
+            </column>
+        </property>
+        <property name="valormaximo" type="big_decimal">
+            <column name="VALORMAXIMO" precision="7" scale="4" not-null="true">
+                <comment>Valor m&#195;&#161;ximo que puede tener el aporte</comment>
+            </column>
+        </property>
+        <property name="esfinal" type="string">
+            <column name="ESFINAL" length="20" not-null="true" />
+        </property>
+        <property name="escalculado" type="char">
+            <column name="ESCALCULADO" length="1" not-null="true">
+                <comment>Determina si el campo es digitable o es calculable. Osea si se permite la edici&#195;&#179;n del aporte.</comment>
+            </column>
+        </property>
+        <property name="reglaCalculo" type="string">
+            <column name="REGLA_CALCULO" length="400">
+                <comment>La regla de c&#195;&#161;lculo en el caso de que el aporte tenga que ser calculado de acuerdo a una operaci&#195;&#179;n matem&#195;&#161;tica con el
+                resto de aportes.</comment>
+            </column>
+        </property>
+        <property name="imprimible" type="char">
+            <column name="IMPRIMIBLE" length="1" not-null="true">
+                <comment>Este campo va a ser utilizado para saber si se debe o no mostrar en la actas</comment>
+            </column>
+        </property>
+        <property name="mostrarMaximo" type="char">
+            <column name="MOSTRAR_MAXIMO" length="1" not-null="true">
+                <comment>Mostrar el m&#195;&#161;ximo en la cabecera</comment>
+            </column>
+        </property>
+        <property name="reemplazado" type="string">
+            <column name="REEMPLAZADO" length="100">
+                <comment>Columna de nota por la que es reemplazada</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si el registro est&#195;&#161; activo</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizaci&#195;&#179;n del registro</comment>
+            </column>
+        </property>
+        <property name="redondear" type="java.lang.Character">
+            <column name="REDONDEAR" length="1">                
+            </column>
+        </property>
+        <set name="sgpRegistrosAporteses" inverse="true">
+            <key>
+                <column name="FOREVA_ID" precision="5" scale="0" not-null="true" />
+                <column name="POS_COLUMNA_NOTA" precision="2" scale="0" not-null="true">
+                    <comment>Posici&#195;&#179;n de la columna de la nota que est&#195;&#161; en la tabla matriculas_asignaturas</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpRegistrosAportes" />
+        </set>
+    </class>
+</hibernate-mapping>

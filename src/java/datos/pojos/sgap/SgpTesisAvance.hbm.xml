@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/04/2014 10:30:06 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpTesisAvance" table="SGP_TESIS_AVANCE" schema="POSTGRADO">
+        <id name="teaId" type="int">
+            <column name="TEA_ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sgpTesis" class="datos.pojos.sgap.SgpTesis" fetch="select" lazy="false">
+            <column name="TEA_TESIS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la tesis</comment>
+            </column>
+        </many-to-one>
+        <property name="teaDescripcion" type="string">
+            <column name="TEA_DESCRIPCION" length="300" not-null="true">
+                <comment>Descripci&#243;n del avance de tesis</comment>
+            </column>
+        </property>
+        <property name="teaPorcentajeAvance" type="java.lang.Short">
+            <column name="TEA_PORCENTAJE_AVANCE" precision="3" scale="0">
+                <comment>Porcentaje de avances acumulados de la tesis</comment>
+            </column>
+        </property>
+        <property name="teaFechaInicia" type="date">
+            <column name="TEA_FECHA_INICIA" length="7" not-null="true">
+                <comment>Fecha de inicio de tesis</comment>
+            </column>
+        </property>
+        <property name="teaFechaFin" type="date">
+            <column name="TEA_FECHA_FIN" length="7" not-null="true">
+                <comment>Fecha finalizaci&#243;n tesis</comment>
+            </column>
+        </property>
+        <property name="teaOrden" type="java.lang.Short">
+            <column name="TEA_ORDEN" precision="3" scale="0">
+                <comment>Orden de loa avances</comment>
+            </column>
+        </property>
+        <property name="teaTiempo" type="short">
+            <column name="TEA_TIEMPO" precision="3" scale="0" not-null="true">
+                <comment>Cantidad de tiempo (n&#250;mero de avance)</comment>
+            </column>
+        </property>
+        <property name="teaFormatoTiempo" type="string">
+            <column name="TEA_FORMATO_TIEMPO" length="15" not-null="true">
+                <comment>El tiempo se mide en horas, d&#237;as, meses, a&#241;os</comment>
+            </column>
+        </property>
+        <property name="teaEstaactivo" type="char">
+            <column name="TEA_ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si est&#225; activo</comment>
+            </column>
+        </property>
+        <property name="teaCreado" type="string">
+            <column name="TEA_CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="teaFechaCreacion" type="date">
+            <column name="TEA_FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="teaActualizado" type="string">
+            <column name="TEA_ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="teaFechaActualizacion" type="date">
+            <column name="TEA_FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizaci&#243;n del registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

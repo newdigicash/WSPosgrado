@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpResolucionesSenescyt" table="SGP_RESOLUCIONES_SENESCYT" schema="POSTGRADO">
+        <comment>Guarda las resoluciones que se han dado en la SENESCYT</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sgpCursosPostgrado" class="datos.pojos.sgap.SgpCursosPostgrado" fetch="select">
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado al que pertenece las resoluciones</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpDocumentosBinarios" class="datos.pojos.sgap.SgpDocumentosBinarios" fetch="select" lazy="false">
+            <column name="RESOLUCION_PDF" precision="5" scale="0" not-null="true">
+                <comment>Documento de resoluci&#195;&#179;n en PDF</comment>
+            </column>
+        </many-to-one>
+        <property name="nroResolucion" type="string">
+            <column name="NRO_RESOLUCION" length="20" not-null="true">
+                <comment>N&#195;&#186;mero de resoluci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="fechaResolucion" type="date">
+            <column name="FECHA_RESOLUCION" length="7" not-null="true">
+                <comment>Fecha de resoluci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="tipoTramite" type="string">
+            <column name="TIPO_TRAMITE" length="3" not-null="true">
+                <comment>Determina el tipo de tr&#195;&#161;mite. CRE: Creacion curso de postgrado; AMP: Ampliaci&#195;&#179;n de la vigencia del curso; REE: Reedici&#195;&#179;n
+                del curso de postgrado</comment>
+            </column>
+        </property>
+        <property name="tipoDocumento" type="string">
+            <column name="TIPO_DOCUMENTO" length="3" not-null="true">
+                <comment>El tipo de documento puede ser: RES: Resoluci&#195;&#179;n o un VIS: Visto Bueno</comment>
+            </column>
+        </property>
+        <property name="fechaVigencia" type="date">
+            <column name="FECHA_VIGENCIA" length="7" not-null="true">
+                <comment>Fecha hasta cuando est&#195;&#161; en vigencia de la resoluci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="observaciones" type="string">
+            <column name="OBSERVACIONES" length="200" />
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="timestamp">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpPlanesCursos" inverse="true">
+            <key>
+                <column name="RESSEN_ID" precision="5" scale="0" not-null="true">
+                    <comment>Resoluci&#195;&#179;n del SENESCYT con la que se creo el plan del curso de postgrado</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpPlanesCurso" />
+        </set>
+    </class>
+</hibernate-mapping>

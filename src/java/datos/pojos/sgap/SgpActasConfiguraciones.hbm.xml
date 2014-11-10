@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/02/2014 04:06:18 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpActasConfiguraciones" table="SGP_ACTAS_CONFIGURACIONES" schema="POSTGRADO">
+        <composite-id name="id" class="datos.pojos.sgap.SgpActasConfiguracionesId">
+            <key-property name="accId" type="int">
+                <column name="ACC_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="accActaId" type="int">
+                <column name="ACC_ACTA_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="accCurposId" type="int">
+                <column name="ACC_CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="accEdicionId" type="int">
+                <column name="ACC_EDICION_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpActas" class="datos.pojos.sgap.SgpActas" update="false" insert="false" fetch="select">
+            <column name="ACC_ACTA_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la cabecera de configuraci&#243;n de actas</comment>
+            </column>
+            <column name="ACC_CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del programa de posgrado</comment>
+            </column>
+            <column name="ACC_EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Id de la edici&#243;n de posgrado</comment>
+            </column>
+        </many-to-one>
+        <property name="accNombre" type="string">
+            <column name="ACC_NOMBRE" length="200" not-null="true">
+                <comment>Nombre del detalle</comment>
+            </column>
+        </property>
+        <property name="accPorcentajeIncidencia" type="short">
+            <column name="ACC_PORCENTAJE_INCIDENCIA" precision="3" scale="0" not-null="true">
+                <comment>El porcentaje de incidencia que tiene nota, con respecto a la nota final</comment>
+            </column>
+        </property>
+        <property name="accInfluyeCalculo" type="char">
+            <column name="ACC_INFLUYE_CALCULO" length="1" not-null="true">
+                <comment>Si el par&#225;metro se aplica para el c&#225;lculo de la nota final S: Aplica, N: no aplica</comment>
+            </column>
+        </property>
+        <property name="accTipo" type="string">
+            <column name="ACC_TIPO" length="3" not-null="true">
+                <comment>El detalle puede ser de tres tipo, por : ASG (asignatura), APR (aporte) o TES (tesis)</comment>
+            </column>
+        </property>
+        <property name="accFormula" type="string">
+            <column name="ACC_FORMULA" length="2000" not-null="true">
+                <comment>Dependiendo del tipo de detalle (ASG, APR, TES) el sistema crea esta f&#243;rmula para el c&#225;lculo del detalle</comment>
+            </column>
+        </property>
+        <property name="accRedondea" type="char">
+            <column name="ACC_REDONDEA" length="1" not-null="true">
+                <comment>Si el aporte se debe redondear o truncar la nota S: redondea, N: trunca</comment>
+            </column>
+        </property>
+        <property name="accNumeroDecimales" type="byte">
+            <column name="ACC_NUMERO_DECIMALES" precision="2" scale="0" not-null="true">
+                <comment>N&#250;mero de decimales que redondea o si trunca</comment>
+            </column>
+        </property>
+        <property name="accEstaactivo" type="char">
+            <column name="ACC_ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si esta activo</comment>
+            </column>
+        </property>
+        <property name="accCreado" type="string">
+            <column name="ACC_CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="accFechaCreacion" type="date">
+            <column name="ACC_FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="accActualizado" type="string">
+            <column name="ACC_ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="accFechaActualizacion" type="date">
+            <column name="ACC_FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizaci&#243;n del registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

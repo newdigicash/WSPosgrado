@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpAsignaturas" table="SGP_ASIGNATURAS" schema="POSTGRADO">
+        <comment>Asignautras o m&#195;&#179;dulos que se ofertan en los cursos de postgrado</comment>
+          
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">SEQ_ASIGNATURAS</param> 
+            </generator>
+        </id>
+        
+        <property name="codigo" type="string">
+            <column name="CODIGO" length="20"  />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" not-null="true" />
+        </property>
+        
+        <property name="nombreLargo" type="string">
+            <column name="NOMBRE_LARGO" not-null="true" />
+        </property>
+        <property name="abreviatura" type="string">
+            <column name="ABREVIATURA" length="20" not-null="true" />
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="horasPresenciales" type="java.lang.Integer">
+            <column name="HORAS_PRESENCIALES" precision="5" scale="0" />
+        </property>
+        <property name="horasEstudiante" type="java.lang.Integer">
+            <column name="HORAS_ESTUDIANTE" precision="5" scale="0" />
+        </property>
+        <property name="horasColaborativo" type="java.lang.Integer">
+            <column name="HORAS_COLABORATIVO" precision="5" scale="0" />
+        </property>
+        <property name="horasAplicacionExperimenta" type="java.lang.Integer">
+            <column name="HORAS_APLICACION_EXPERIMENTA" precision="5" scale="0" />
+        </property>
+        <property name="totalHoras" type="java.lang.Integer">
+            <column name="TOTAL_HORAS" precision="5" scale="0" />
+        </property>
+        <property name="creditos" type="big_decimal">
+            <column name="CREDITOS" precision="5" />
+        </property>
+        <set name="sgpAsignaturasMallases" inverse="true">
+            <key>
+                <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Asignatura que se encuentra en la malla</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpAsignaturasMallas" />
+        </set>
+        <set name="sgpOfertaAsignaturas" inverse="true">
+            <key>
+                <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Edici&#195;&#179;n del curso de postgrado</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpOfertaAsignatura" />
+        </set>
+        
+        <many-to-one name="sgpEjesFormacion" class="datos.pojos.sgap.SgpEjesFormacion" fetch="select">
+            <column name="EJEFOR_ID" precision="5" scale="0">
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

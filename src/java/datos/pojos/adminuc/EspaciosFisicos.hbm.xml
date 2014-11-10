@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/02/2012 03:32:41 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.EspaciosFisicos" table="ESPACIOS_FISICOS" schema="ADMINUC">
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="dependencia" class="datos.pojos.adminuc.Dependencias" fetch="select">
+            <column name="DEPENDENCIA_ID" precision="5" scale="0" />
+        </many-to-one>
+        <property name="abreviatura" type="string">
+            <column name="ABREVIATURA"  length="10" not-null="false"/>
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE"  length="50" not-null="true"/>
+        </property>
+        <property name="tipespId" type="int">
+            <column name="TIPESP_ID" precision="5" scale="0" not-null="true"/>
+        </property>
+        <property name="capacidad" type="int">
+            <column name="CAPACIDAD" precision="3" scale="0" not-null="true"/>
+        </property>
+        <property name="bloqueId" type="int">
+            <column name="BLOQUE_ID" precision="5" scale="0" not-null="true"/>
+        </property>
+        <property name="area" type="big_decimal">
+            <column name="AREA" precision="6" scale="2" not-null="false"/>
+        </property>
+        <property name="piso" type="int">
+            <column name="PISO" precision="2" scale="0" not-null="true"/>
+        </property>
+        <property name="esApto" type="char">
+            <column name="ESAPTO" length="1" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="OBSERVACIONES" length="1000" not-null="false" />
+        </property>
+        <property name="estado" type="char">
+            <column name="ESTADO" length="1" not-null="true" />
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

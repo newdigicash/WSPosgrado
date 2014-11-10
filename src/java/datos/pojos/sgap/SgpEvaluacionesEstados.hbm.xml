@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpEvaluacionesEstados" table="SGP_EVALUACIONES_ESTADOS" schema="POSTGRADO">
+        <comment>Esta tabla tien las reglas de aprobaci&#195;&#179;n, que son los distintos estados en los que puede estar un estudiante como son reprobado, suspenso,
+        reprobado.</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpEvaluacionesEstadosId">
+            <key-property name="id" type="byte">
+                <column name="ID" precision="2" scale="0" />
+            </key-property>
+            <key-property name="forevaId" type="int">
+                <column name="FOREVA_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpFormasEvaluacion" class="datos.pojos.sgap.SgpFormasEvaluacion" update="false" insert="false" fetch="select">
+            <column name="FOREVA_ID" precision="5" scale="0" not-null="true">
+                <comment>La forma de evaluaci&#195;&#179;n a la que est&#195;&#161; relacionada la regla de aprobaci&#195;&#179;n.</comment>
+            </column>
+        </many-to-one>
+        <property name="reglaEstado" type="string">
+            <column name="REGLA_ESTADO" length="400" not-null="true">
+                <comment>Regla que nos indica de acuerdo a que condici&#195;&#179;n el estudiante cae en un estado de aprobaci&#195;&#179;n.</comment>
+            </column>
+        </property>
+        <property name="estadoAprobacion" type="string">
+            <column name="ESTADO_APROBACION" length="2" not-null="true">
+                <comment>AP: Aprobado, RE: Reprobado, SU: Suspenso, SS: Suspenso Sanci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="prioridad" type="byte">
+            <column name="PRIORIDAD" precision="2" scale="0" not-null="true">
+                <comment>Es la prioridad de las reglas. Tomando como mayor prioridad el 1 y as&#195;&#173; susesivamente en forma ascendente.</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

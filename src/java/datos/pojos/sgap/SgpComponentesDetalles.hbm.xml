@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpComponentesDetalles" table="SGP_COMPONENTES_DETALLES" schema="POSTGRADO">
+        <comment>Guarda el detalle de la configuraci&#195;&#179;n para los componentes de un plan de carrera</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpComponentesDetallesId">
+            <key-property name="cabcomId" type="int">
+                <column name="CABCOM_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="componenteId" type="int">
+                <column name="COMPONENTE_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpComponentesCabeceras" class="datos.pojos.sgap.SgpComponentesCabeceras" update="false" insert="false" fetch="select">
+            <column name="CABCOM_ID" precision="5" scale="0" not-null="true">
+                <comment>Maestro de la configuraci&#195;&#179;n del componentes que viene de la tabla SGP_cabeceras_componentes</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpComponentes" class="datos.pojos.sgap.SgpComponentes" update="false" insert="false" fetch="select">
+            <column name="COMPONENTE_ID" precision="5" scale="0" not-null="true">
+                <comment>Componente que se va configurar</comment>
+            </column>
+        </many-to-one>
+        <property name="numero" type="string">
+            <column name="NUMERO" length="20">
+                <comment>N&#195;&#186;mero que va a presentar en el componente</comment>
+            </column>
+        </property>
+        <property name="orden" type="short">
+            <column name="ORDEN" precision="3" scale="0" not-null="true">
+                <comment>Orden de presentaci&#195;&#179;n del componente en el reporte</comment>
+            </column>
+        </property>
+        <property name="publicable" type="char">
+            <column name="PUBLICABLE" length="1" not-null="true">
+                <comment>Si el contenido es publicado o privado a trav&#195;&#169;s del internet S: publicable, N: no publicable</comment>
+            </column>
+        </property>
+        <property name="automatico" type="char">
+            <column name="AUTOMATICO" length="1" not-null="true">
+                <comment>Si el componente del plan se genera en forma autom&#195;&#161;tica o es est&#195;&#161;tico, S: genera autom&#195;&#161;ticamente, N: es
+                est&#195;&#161;tico</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="FECHA_CREACION" length="7" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="timestamp">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpComponentesPlaneses" inverse="true">
+            <key>
+                <column name="CABCOM_ID" precision="5" scale="0" not-null="true">
+                    <comment>Cabecera de la configuraci&#195;&#179;n de los componentes</comment>
+                </column>
+                <column name="COMPONENTE_ID" precision="5" scale="0" not-null="true">
+                    <comment>Componetne en el qie se registra el valor de acuerdo al plan de carrera</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpComponentesPlanes" />
+        </set>
+    </class>
+</hibernate-mapping>

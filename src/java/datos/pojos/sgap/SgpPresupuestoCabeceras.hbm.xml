@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpPresupuestoCabeceras" table="SGP_PRESUPUESTO_CABECERAS" schema="POSTGRADO">
+        <comment>Tabla que guarda las cabeceras de las configuraciones de los rubros</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" not-null="true">
+                <comment>Nombre de la cabeceras del presupuesto</comment>
+            </column>
+        </property>
+        <property name="nivforId" type="int">
+            <column name="NIVFOR_ID" precision="5" scale="0" not-null="true">
+                <comment>Nivel de formaci&#195;&#179;n al que se aplica la configuraci&#195;&#179;n de rubros</comment>
+            </column>
+        </property>
+        <property name="envigencia" type="char">
+            <column name="ENVIGENCIA" length="1" not-null="true">
+                <comment>&#194;&#180;Determina la vigencia de la configuraci&#195;&#179;n 'S' en vigencia 'N' no vigente</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpPresupuestoRubroses" inverse="true">
+            <key>
+                <column name="PRECAB_ID" precision="5" scale="0" not-null="true">
+                    <comment>C&#195;&#179;digo del presupuesto cabecera</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpPresupuestoRubros" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpRegistrosAportes" table="SGP_REGISTROS_APORTES" schema="POSTGRADO">
+        <comment>Tabla que guarda las los aportes a los que pertenece a la cabecera de asentamiento</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpRegistrosAportesId">
+            <key-property name="regcabId" type="int">
+                <column name="REGCAB_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="forevaId" type="int">
+                <column name="FOREVA_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="posColumnaNota" type="byte">
+                <column name="POS_COLUMNA_NOTA" precision="2" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpEvaluacionesAportes" class="datos.pojos.sgap.SgpEvaluacionesAportes" update="false" insert="false" fetch="select">
+            <column name="FOREVA_ID" precision="5" scale="0" not-null="true" />
+            <column name="POS_COLUMNA_NOTA" precision="2" scale="0" not-null="true">
+                <comment>Posici&#195;&#179;n de la columna de la nota que est&#195;&#161; en la tabla matriculas_asignaturas</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpRegistrosCabeceras" class="datos.pojos.sgap.SgpRegistrosCabeceras" update="false" insert="false" fetch="select">
+            <column name="REGCAB_ID" precision="5" scale="0" not-null="true">
+                <comment>N&#195;&#186;mero de Asentamiento</comment>
+            </column>
+            <column name="FOREVA_ID" precision="5" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>Si el asentamiento aporte est&#195;&#161; activo.</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

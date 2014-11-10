@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-feb-2014 7:20:20 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpFinanciamiento" table="SGP_FINANCIAMIENTO" schema="POSTGRADO">
+        <id name="finId" type="int">
+            <column name="FIN_ID" precision="5" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">SEQ_FINANCIAMIENTO</param> 
+            </generator>
+        </id>
+        <property name="finNombre" type="string">
+            <column name="FIN_NOMBRE" length="100" not-null="true">
+                <comment>Nombre-Descripcion del financiamiento</comment>
+            </column>
+        </property>
+        <property name="finEstaactivo" type="char">
+            <column name="FIN_ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si est&#225; activo</comment>
+            </column>
+        </property>
+        <property name="finCreado" type="string">
+            <column name="FIN_CREADO" length="20" not-null="true">
+                <comment>Indica la persona que cre&#243; el registro</comment>
+            </column>
+        </property>
+        <property name="finFechaCreacion" type="date">
+            <column name="FIN_FECHA_CREACION" length="7" not-null="true">
+                <comment>Indica la fecha de creaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="finActualizado" type="string">
+            <column name="FIN_ACTUALIZADO" length="20">
+                <comment>Indica la persona que actualiz&#243;</comment>
+            </column>
+        </property>
+        <property name="finFechaActualizado" type="date">
+            <column name="FIN_FECHA_ACTUALIZADO" length="7">
+                <comment>Indica la fecha de actualizaci&#243;n del sistema</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

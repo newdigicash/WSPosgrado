@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpParametros" table="SGP_PARAMETROS" schema="POSTGRADO">
+        <comment>Tabla que guarda los par&#195;&#161;metros que se pueden configurar en la carrera</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="sequence">
+                <param name="sequence">SEQ_PARAMETROS</param> 
+            </generator>
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" not-null="true" />
+        </property>
+        <property name="valor" type="string">
+            <column name="VALOR" length="100" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" not-null="true">
+                <comment>Descripci&#195;&#179;n de ayuda para saber que se puede configurar con el par&#195;&#161;metro</comment>
+            </column>
+        </property>
+        <property name="esconfigurable" type="char">
+            <column name="ESCONFIGURABLE" length="1" not-null="true">
+                <comment>Determina si el par&#195;&#161;metro es configurable por el sistema o debe ser configurado desde la direcci&#195;&#179;n de desarrollo
+                    inform&#195;&#161;tico por SQL
+                </comment>
+            </column>
+        </property>
+        <property name="esinternet" type="char">
+            <column name="ESINTERNET" length="1" not-null="true">
+                <comment>Determina si el par&#195;&#161;metro es utilizado para internte 'S' o es utilizado para la intranet 'N'</comment>
+            </column>
+        </property>
+        <property name="configurablePor" type="string">
+            <column name="CONFIGURABLE_POR" length="3" not-null="true">
+                <comment>Si el par&#195;&#161;metro es configurable a nivel de carrera 'CRR' (Carrera) o es configurable para todos los cursos de postgrado a nivel de universidad
+                    'NVR' (Universidad). SI es a nivel de carrera deber&#195;&#173;amos utilizar la tabla par&#195;&#161;metros carreras.
+                </comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpParametrosPeriodoses" inverse="true">
+            <key>
+                <column name="PARAMETRO_ID" precision="5" scale="0" not-null="true">
+                    <comment>ID del parametro para el periodo</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpParametrosPeriodos" />
+        </set>
+        <set name="sgpParametrosCursos" inverse="true">
+            <key>
+                <column name="PARAMTERO_ID" precision="5" scale="0" not-null="true">
+                    <comment>Par&#195;&#161;metro a ser configurado</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpParametrosCurso" />
+        </set>
+    </class>
+</hibernate-mapping>

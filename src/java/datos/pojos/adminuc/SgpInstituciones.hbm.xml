@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/12/2011 05:07:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.SgpInstituciones" table="SGP_INSTITUCIONES" schema="ADMINUC">
+        <comment>Instituciones jur&#195;&#173;dicas</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="ruc" type="string">
+            <column name="RUC" length="20" unique="true">
+                <comment>&lt;&lt;&lt;&lt;ruc de la instituci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="200" not-null="true" unique="true">
+                <comment>Nombre de la instituci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" length="200">
+                <comment>Direcci&#195;&#179;n de la instituci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="ubicacionId" type="int">
+            <column name="UBICACION_ID" precision="5" scale="0" not-null="true">
+                <comment>Unicaci&#195;&#179;n de la instituci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="url" type="string">
+            <column name="URL" length="100">
+                <comment>Url de la p&#195;&#161;gina de la instituci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="100">
+                <comment>Email de la instituci&#195;&#179;n</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="string">
+            <column name="FECHA_CREACION" length="20" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

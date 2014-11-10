@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16/12/2013 09:50:34 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpUnidadesCabecera" table="SGP_UNIDADES_CABECERA" schema="POSTGRADO">
+        <comment>Tabla utilizada para agrupar a las unidades de configuraci&#243;n curricular, y permitir diferentes configuraciones ya sea como maestr&#237;as o
+        doctorados.</comment>
+        <id name="uncId" type="int">
+            <column name="UNC_ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="uncDescripcion" type="string">
+            <column name="UNC_DESCRIPCION" length="100" not-null="true">
+                <comment>Campo descriptivo para la configuraci&#243;n y agrupaci&#243;n de las unidades de organizaci&#243;n curricular.</comment>
+            </column>
+        </property>
+        <property name="uncTipo" type="string">
+            <column name="UNC_TIPO" length="2" not-null="true">
+                <comment>Campo que identifica a que nivel de formaci&#243;n se aplican las unidades de organizaci&#243;n curricular. MA: MAESTRIAS, DO: DOCTORADOS</comment>
+            </column>
+        </property>
+        <property name="uncEnvigencia" type="char">
+            <column name="UNC_ENVIGENCIA" length="1" not-null="true">
+                <comment>Identifica la vigencia de la configuraci&#243;n, si est&#225; en vigencia.</comment>
+            </column>
+        </property>
+        <property name="uncEstaactivo" type="char">
+            <column name="UNC_ESTAACTIVO" length="1" not-null="true">
+                <comment>Campo que determina el borrado l&#243;gico.</comment>
+            </column>
+        </property>
+        <property name="uncCreado" type="string">
+            <column name="UNC_CREADO" length="20" not-null="true">
+                <comment>Campo de auditor&#237;a a nivel de tupla, que indica la persona que creo el registro.</comment>
+            </column>
+        </property>
+        <property name="uncFechaCreacion" type="date">
+            <column name="UNC_FECHA_CREACION" length="7" not-null="true">
+                <comment>Campo de auditor&#237;a a nivel de tupla, que indica la fecha en la que se creo el registro.</comment>
+            </column>
+        </property>
+        <property name="uncActualizado" type="string">
+            <column name="UNC_ACTUALIZADO" length="20">
+                <comment>Campo de auditor&#237;a a nivel de tupla, que indica la persona que actualiz&#243; la &#250;ltima vez el registro.</comment>
+            </column>
+        </property>
+        <property name="uncFechaActualizacion" type="date">
+            <column name="UNC_FECHA_ACTUALIZACION" length="7">
+                <comment>Campo de auditor&#237;a a nivel de tupla, que indica la fecha en la que se actualiz&#243; la &#250;ltima vez el registro.</comment>
+            </column>
+        </property>
+        <set name="sgpUnidadesOrganizacions" inverse="true">
+            <key>
+                <column name="UNO_UNICAB_ID" precision="5" scale="0" not-null="true">
+                    <comment>Grupo al que pertenece la unidade de organizaci&#243;n curricular</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpUnidadesOrganizacion" />
+        </set>
+    </class>
+</hibernate-mapping>

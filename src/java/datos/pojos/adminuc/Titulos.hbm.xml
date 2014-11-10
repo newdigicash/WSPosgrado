@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/12/2011 05:07:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.adminuc.Titulos" table="TITULOS" schema="ADMINUC">
+        <comment>Esta tabla guarda la informaci&#195;&#179;n sobre los t&#195;&#173;tulos</comment>
+        <id name="id" type="int">
+            <column name="ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="nivelesFormacion" class="datos.pojos.adminuc.NivelesFormacion" fetch="select">
+            <column name="NIVFOR_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del nivel acad&#195;&#169;mico</comment>
+            </column>
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="200" not-null="true" unique="true">
+                <comment>DESCRIPCION</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="string">
+            <column name="ESTAACTIVO" length="1" not-null="true">
+                <comment>ESTA ACTIVO</comment>
+            </column>
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true">
+                <comment>USUARIO QUE CREA EL REGISTRO</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true">
+                <comment>FECHA DE CREACION DEL REGISTRO</comment>
+            </column>
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20">
+                <comment>USUARIO DE ACTUALIZACION DEL REGISTRO</comment>
+            </column>
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7">
+                <comment>FECHA DE ACTUALIZACION DE REGISTRO</comment>
+            </column>
+        </property>
+        <set name="titulosProfesionaleses" inverse="true">
+            <key>
+                <column name="TIPTIT_ID" precision="5" scale="0" />
+            </key>
+            <one-to-many class="datos.pojos.adminuc.TitulosProfesionales" />
+        </set>
+    </class>
+</hibernate-mapping>

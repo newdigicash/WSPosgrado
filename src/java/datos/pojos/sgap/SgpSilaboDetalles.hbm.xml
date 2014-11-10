@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpSilaboDetalles" table="SGP_SILABO_DETALLES" schema="POSTGRADO">
+        <comment>Configuracion del detalle de los componentes de los s&#195;&#173;labos</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpSilaboDetallesId">
+            <key-property name="silcabId" type="int">
+                <column name="SILCAB_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="componenteId" type="int">
+                <column name="COMPONENTE_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpSilaboCabeceras" class="datos.pojos.sgap.SgpSilaboCabeceras" update="false" insert="false" fetch="select">
+            <column name="SILCAB_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo de la cabecera del s&#195;&#173;labo</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpComponentes" class="datos.pojos.sgap.SgpComponentes" update="false" insert="false" fetch="select">
+            <column name="COMPONENTE_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#195;&#179;digo del componente del s&#195;&#173;labo</comment>
+            </column>
+        </many-to-one>
+        <property name="numero" type="string">
+            <column name="NUMERO" length="20" not-null="true" />
+        </property>
+        <property name="orden" type="short">
+            <column name="ORDEN" precision="3" scale="0" not-null="true">
+                <comment>Id del componente de s&#195;&#173;labos</comment>
+            </column>
+        </property>
+        <property name="publicable" type="char">
+            <column name="PUBLICABLE" length="1" not-null="true">
+                <comment>Si el campo es publicable</comment>
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <set name="sgpSilaboComponenteses" inverse="true">
+            <key>
+                <column name="SILCAB_ID" precision="5" scale="0" not-null="true" />
+                <column name="COMPONENTE_ID" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpSilaboComponentes" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/04/2012 09:23:46 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpInstitucionesCurso" table="SGP_INSTITUCIONES_CURSO" schema="POSTGRADO">
+        <comment>Instituciones educativas que organizan el curso de postgrado</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpInstitucionesCursoId">
+            <key-property name="placurId" type="int">
+                <column name="PLACUR_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="institucionId" type="int">
+                <column name="INSTITUCION_ID" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpPlanesCurso" class="datos.pojos.sgap.SgpPlanesCurso" update="false" insert="false" fetch="select">
+            <column name="PLACUR_ID" precision="5" scale="0" not-null="true" />
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado en el que se vincula las instituciones educativas que organiza</comment>
+            </column>
+        </many-to-one>
+        <property name="tipoInstitucion" type="string">
+            <column name="TIPO_INSTITUCION" length="3" not-null="true">
+                <comment>Tipo de instituci&#195;&#179;n si es educativa 'DCT' o es instituci&#195;&#179;n juridica 'NST'</comment>
+            </column>
+        </property>
+        <property name="tipoConvenio" type="string">
+            <column name="TIPO_CONVENIO" length="3" not-null="true">
+                <comment>Determina si la instituci&#195;&#179;n si es Organizadora 'ORG' o Auspiciante 'AUS'</comment>
+            </column>
+        </property>
+        <property name="tipoFinanciamiento" type="string">
+            <column name="TIPO_FINANCIAMIENTO" length="3" not-null="false">
+            </column>
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="timestamp">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

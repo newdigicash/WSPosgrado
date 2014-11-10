@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-mar-2014 11:33:12 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpOfertaAsignatura" table="SGP_OFERTA_ASIGNATURA" schema="POSTGRADO">
+        <comment>Registra la informaci&#195;&#179;n de las asigantras a ser ofertadas en un curso de postgrado</comment>
+        <composite-id name="id" class="datos.pojos.sgap.SgpOfertaAsignaturaId">
+            <key-property name="curposId" type="int">
+                <column name="CURPOS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="edicionId" type="int">
+                <column name="EDICION_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="asignaturaId" type="int">
+                <column name="ASIGNATURA_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="grupo" type="int">
+                <column name="GRUPO" precision="5" scale="0" />
+            </key-property>
+        </composite-id>
+
+        <property name="sgpTemas" type="int">
+            <column name="TEMA_ID" precision="5" scale="0">
+                <comment>C&#243;digo del tema de libre elecci&#243;n</comment>
+            </column>
+        </property>
+        <many-to-one name="sgpEdiciones" class="datos.pojos.sgap.SgpEdiciones" update="false" insert="false" fetch="select">
+            <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                <comment>Curso de postgrado en el que se oferta asiganturas</comment>
+            </column>
+            <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                <comment>Periodo lectivo de oferta asignaturas</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpAsignaturas" class="datos.pojos.sgap.SgpAsignaturas" update="false" insert="false" fetch="select">
+            <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                <comment>Edici&#195;&#179;n del curso de postgrado</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sgpSecciones" class="datos.pojos.sgap.SgpSecciones" fetch="select">
+            <column name="SECCION_ID" precision="2" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="perlecId" type="int">
+            <column name="PERLEC_ID" precision="5" scale="0" not-null="true">
+                <comment>C&#243;digo del grupo que se va a ofertar</comment>
+            </column>
+        </property>
+        <property name="nombreGrupo" type="string">
+            <column name="NOMBRE_GRUPO" length="70" />
+        </property>
+        <property name="cupoMin" type="int">
+            <column name="CUPO_MIN" precision="3" scale="0" not-null="true">
+                <comment>Cupo m&#195;&#173;nimo para el n&#195;&#186;mero de estudiantes en el grupo</comment>
+            </column>
+        </property>
+        <property name="cupoMax" type="int">
+            <column name="CUPO_MAX" precision="3" scale="0" not-null="true">
+                <comment>Cupo m&#195;&#161;ximo para abrir la asignatura</comment>
+            </column>
+        </property>
+        <property name="cupoExterno" type="int">
+            <column name="CUPO_EXTERNO" precision="3" scale="0" not-null="true">
+                <comment>Cupo para los estudiantes externos que desean tomar la asignatura</comment>
+            </column>
+        </property>
+        <property name="horasPresenciales" type="java.lang.Integer">
+            <column name="HORAS_PRESENCIALES" precision="5" scale="0">
+                <comment>N&#195;&#186;mero de horas presenciales ingresados en minutos</comment>
+            </column>
+        </property>
+        <property name="horasEstudiante" type="java.lang.Integer">
+            <column name="HORAS_ESTUDIANTE" precision="5" scale="0">
+                <comment>N&#195;&#186;mero de horas del estudiante ingresados en minutos</comment>
+            </column>
+        </property>
+        <property name="totalCreditos" type="java.lang.Double">
+            <column name="TOTAL_CREDITOS" precision="5" scale="2" not-null="true" />
+        </property>
+        <property name="forevaId" type="int">
+            <column name="FOREVA_ID" precision="5" scale="0" not-null="true" />
+        </property>
+        <property name="estaactivo" type="char">
+            <column name="ESTAACTIVO" length="1" not-null="true" />
+        </property>
+        <property name="creado" type="string">
+            <column name="CREADO" length="20" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="actualizado" type="string">
+            <column name="ACTUALIZADO" length="20" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FECHA_ACTUALIZACION" length="7" />
+        </property>
+        <property name="fechaInicia" type="date">
+            <column name="FECHA_INICIA" length="7">
+                <comment>Fecha inicia a dictarse la asigantura</comment>
+            </column>
+        </property>
+        <property name="fechaTermina" type="date">
+            <column name="FECHA_TERMINA" length="7">
+                <comment>Fecha termina de dictarse la asignatura</comment>
+            </column>
+        </property>
+        <property name="fechaIniciaCalificaciones" type="date">
+            <column name="FECHA_INICIA_CALIFICACIONES" length="7">
+                <comment>Fecha de inicio para el registro de calificaciones.</comment>
+            </column>
+        </property>
+        <property name="fechaTerminaCalificaciones" type="date">
+            <column name="FECHA_TERMINA_CALIFICACIONES" length="7">
+                <comment>Fecha en la que termina el registro de calificaciones.</comment>
+            </column>
+        </property>
+        <set name="sgpOfertaDocenteses" inverse="true">
+            <key>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>id de la carrera que hereda de la oferta</comment>
+                </column>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>Edici&#195;&#179;n del curso de postgrado</comment>
+                </column>
+                <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                    <comment>id de la asignatura que hereda de la oferta</comment>
+                </column>
+                <column name="GRUPO" precision="3" scale="0" not-null="true">
+                    <comment>hereda de la oferta el grupo</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpOfertaDocentes" />
+        </set>
+        <set name="sgpHorariosOfertases" inverse="true">
+            <key>
+                <column name="CURPOS_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la carrera</comment>
+                </column>
+                <column name="EDICION_ID" precision="5" scale="0" not-null="true">
+                    <comment>Edici&#195;&#179;n del curso de postgrado</comment>
+                </column>
+                <column name="ASIGNATURA_ID" precision="5" scale="0" not-null="true">
+                    <comment>Id de la asignatura</comment>
+                </column>
+                <column name="GRUPO" precision="3" scale="0" not-null="true">
+                    <comment>Grupo para el que se asigna el horario</comment>
+                </column>
+            </key>
+            <one-to-many class="datos.pojos.sgap.SgpHorariosOfertas" />
+        </set>
+    </class>
+</hibernate-mapping>

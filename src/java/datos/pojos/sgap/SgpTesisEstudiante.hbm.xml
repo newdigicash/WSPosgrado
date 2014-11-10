@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/04/2014 10:30:06 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="datos.pojos.sgap.SgpTesisEstudiante" table="SGP_TESIS_ESTUDIANTE" schema="POSTGRADO">
+        <composite-id name="id" class="datos.pojos.sgap.SgpTesisEstudianteId">
+            <key-property name="teeTesisId" type="int">
+                <column name="TEE_TESIS_ID" precision="5" scale="0" />
+            </key-property>
+            <key-property name="teePersonaId" type="string">
+                <column name="TEE_PERSONA_ID" length="15" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sgpTesis" class="datos.pojos.sgap.SgpTesis" update="false" insert="false" fetch="select">
+            <column name="TEE_TESIS_ID" precision="5" scale="0" not-null="true">
+                <comment>Id del trabajo de tesis</comment>
+            </column>
+        </many-to-one>
+        <property name="teeDescripcion" type="string">
+            <column name="TEE_DESCRIPCION" length="200" not-null="true">
+                <comment>Descripci&#243;n de la aprobaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="teeNota1" type="big_decimal">
+            <column name="TEE_NOTA1" precision="7" scale="4">
+                <comment>Notas de aprobaci&#243;n del trabajo de tesis</comment>
+            </column>
+        </property>
+        <property name="teeNota2" type="big_decimal">
+            <column name="TEE_NOTA2" precision="7" scale="4" />
+        </property>
+        <property name="teeNota3" type="big_decimal">
+            <column name="TEE_NOTA3" precision="7" scale="4" />
+        </property>
+        <property name="teeNota4" type="big_decimal">
+            <column name="TEE_NOTA4" precision="7" scale="4" />
+        </property>
+        <property name="teeNota5" type="big_decimal">
+            <column name="TEE_NOTA5" precision="7" scale="4" />
+        </property>
+        <property name="teeNota6" type="big_decimal">
+            <column name="TEE_NOTA6" precision="7" scale="4" />
+        </property>
+        <property name="teeNota7" type="big_decimal">
+            <column name="TEE_NOTA7" precision="7" scale="4" />
+        </property>
+        <property name="teeNota8" type="big_decimal">
+            <column name="TEE_NOTA8" precision="7" scale="4" />
+        </property>
+        <property name="teeNota9" type="big_decimal">
+            <column name="TEE_NOTA9" precision="7" scale="4" />
+        </property>
+        <property name="teeNota10" type="big_decimal">
+            <column name="TEE_NOTA10" precision="7" scale="4" />
+        </property>
+        <property name="teeTotal" type="big_decimal">
+            <column name="TEE_TOTAL" precision="7" scale="4">
+                <comment>Nota total de tesis</comment>
+            </column>
+        </property>
+        <property name="teeEstadoAprobacion" type="string">
+            <column name="TEE_ESTADO_APROBACION" length="2">
+                <comment>AP: Aprobado, RE: Reprobado</comment>
+            </column>
+        </property>
+        <property name="teeEstaactivo" type="char">
+            <column name="TEE_ESTAACTIVO" length="1" not-null="true">
+                <comment>Indica si esta activo</comment>
+            </column>
+        </property>
+        <property name="teeCreado" type="string">
+            <column name="TEE_CREADO" length="20" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="teeFechaCreacion" type="date">
+            <column name="TEE_FECHA_CREACION" length="7" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="teeActualizado" type="string">
+            <column name="TEE_ACTUALIZADO" length="20">
+                <comment>Usuario que actualiza el registro</comment>
+            </column>
+        </property>
+        <property name="teeFechaActualizacion" type="date">
+            <column name="TEE_FECHA_ACTUALIZACION" length="7">
+                <comment>Fecha de actualizaci&#243;n del registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
